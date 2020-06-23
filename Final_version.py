@@ -1,3 +1,6 @@
+# Study group code converted into a script - to be used as a basis for later
+# code, it does not actually run properly.
+# --------------------------------------------------------------------------
 
 # coding: utf-8
 
