@@ -34,8 +34,20 @@ tt = np.linspace(*tspan,1000)
 X0 = [0.1,0.2,0.1,0.2]
 
 sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
+solx = sol.y[0]
+soly = sol.y[2]
 
-# Plot the trajectory of (x,y)
-plt.plot(sol.y[0],sol.y[2])
+# Plot the trajectory of (x,y) in the stationary frame
+fig = plt.figure(1)
+ax = fig.add_axes([.1,.1,.8,.8])
+ax.plot(solx,soly)
+
+# Plot the trajectory of (x,y) in a rotating frame
+rotsolx = cos(Om*tt)*solx - sin(Om*tt)*soly
+rotsoly = sin(Om*tt)*solx + cos(Om*tt)*soly
+
+fig = plt.figure(2)
+ax = fig.add_axes([.1,.1,.8,.8])
+ax.plot(rotsolx,rotsoly)
+
 plt.show()
-
