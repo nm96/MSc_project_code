@@ -4,7 +4,7 @@ import numpy as np
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 
-# Rename basic functions and constants for clarity:
+# Rename basic functions and constants for clarity
 cos = np.cos
 sin = np.sin
 tanh = np.tanh
@@ -21,6 +21,8 @@ def dXdt(t,X,eps,Om,m,c,k):
             dy,
             (F_y + eps*m*sin(Om*t)*Om**2 - c*dy - k*y)/m]
 
+
+# Define parameter values
 eps = 0.03
 Om = 4.1
 m = 10
@@ -29,9 +31,10 @@ k = 10
 
 params = (eps,Om,m,c,k)
     
-tspan = (0,10)    
+# Integrat the ODE system over a given time span with given initial conditions
+tspan = (0,100)    
 tt = np.linspace(*tspan,1000)
-X0 = [0.1,0.2,0.1,0.2]
+X0 = [0.1,0,0,0]
 
 sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 solx = sol.y[0]
