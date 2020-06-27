@@ -137,8 +137,8 @@ def system_ivp(t,X):
     
     delta_dot = r_dot if r>h else 0
     
-    cPsi = (x - eps*cos(Omega*t))/r
-    sPsi = (y - eps*sin(Omega*t))/r
+    cPsi = (x - eps*cos(Omega*t))/r     # = cos(psi)
+    sPsi = (y - eps*sin(Omega*t))/r     # = sin(psi)
     
     if model == 'S':
         # simple - no additional force
