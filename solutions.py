@@ -5,7 +5,7 @@ be incorporated in the Jeffcott equations are in the the 'models' module.
 
 import numpy as np
 from scipy.integrate import solve_ivp
-from scipy.fft import fft
+from scipy.fft import rfft
 import matplotlib.pyplot as plt
 
 # Rename basic functions and constants for clarity
@@ -30,10 +30,8 @@ def dXdt(t,X,eps,Omega,m,c,k,h,model):
     F_x = -fn*cPsi + ft*sPsi
     F_y = -fn*sPsi - ft*cPsi
     # Final result (1st order Jeffcott eqns):
-    return [dx,
-            (F_x + eps*m*np.cos(Omega*t)*Omega**2 - c*dx - k*x)/m,
-            dy,
-            (F_y + eps*m*np.sin(Omega*t)*Omega**2 - c*dy - k*y)/m]
+    return [dx, (F_x + eps*m*np.cos(Omega*t)*Omega**2 - c*dx - k*x)/m, dy, (F_y
+        + eps*m*np.sin(Omega*t)*Omega**2 - c*dy - k*y)/m]
 
 
 def solxy(sol):
@@ -52,3 +50,11 @@ def rotsolxy(sol,Omega):
     tt = sol.t
     return np.array([np.cos(Omega*tt)*solx - np.sin(Omega*tt)*soly,
     np.sin(Omega*tt)*solx + np.cos(Omega*tt)*soly])
+
+def mod2dfft(sol):
+    solx = sol.y[0]
+    soly = sol.y[2]
+    fftx = rfft(solx)
+    ffty = rfft(soly)
+    return (np.abs(fftx)**2 + np.abs(ffty)**2)**0.5
+
