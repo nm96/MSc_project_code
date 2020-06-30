@@ -1,6 +1,14 @@
 """Module containing functions which encode various nonlinear forcing models
 which can be incorporated into the Jeffcott equations."""
 
+import numpy as np
+
+# Rename basic functions and constants for clarity
+cos = np.cos
+sin = np.sin
+tanh = np.tanh
+pi = np.pi
+
 def simple(X,dummy):
     """Model function for the trivial no-forcing model. Dummy parameter
     included in order to fit the convention for model-passing.
