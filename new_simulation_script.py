@@ -2,6 +2,7 @@
 
 import numpy as np
 from scipy.integrate import solve_ivp
+from scipy.fft import fft
 import matplotlib.pyplot as plt
 
 fn = 0  # Initialize figure number for plotting
@@ -19,6 +20,9 @@ def simple(X,dummy):
     return (0,0)
 
 def dXdt(t,X,eps,Om,m,c,k,h,model):
+    """Right hand side of the Jeffcott equations in first order form, to be
+    passed to a numerical integrator.
+    """
     # Unpack the components of X:
     x,dx,y,dy = X
     # Define r = distance from stator centre to rotor centre:
