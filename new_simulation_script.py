@@ -12,7 +12,7 @@ fn = 0  # Initialize figure number for plotting
 
 # Define parameter values
 eps = 0.0525 # Rotor eccentricity
-Om = 3.5 # Driving frequency
+Om = 4.1 # Driving frequency
 m = 10 # Mass (per unit length)
 c = 0.05 # Damping coefficient
 k = 10 # Stiffness coefficient
@@ -26,8 +26,8 @@ params = (eps,Om,m,c,k,h,model) # Package parameters into a tuple
     
 # Integrate the ODE system over a given time span with given initial conditions
 
-N = 2**14
 tspan = (0,2**10)    
+N = tspan[1]*2**4
 tt = np.linspace(*tspan,N)
 X0 = [0.1,0,0,0]
 
@@ -35,8 +35,8 @@ sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 
 # Plot fft
 
-fn += 1; fig = plt.figure(fn)
-ax = fig.add_axes([.1,.1,.8,.8])
+fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+
 ax.axvline(Om_nat,ls='--',c='g')
 ax.axvline(Om,ls='--',c='r')
 ax.plot(*transformed(sol))
@@ -58,8 +58,8 @@ sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 
 # Plot fft
 
-fn += 1; fig = plt.figure(fn)
-ax = fig.add_axes([.1,.1,.8,.8])
+fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+
 ax.axvline(Om_nat,ls='--',c='g')
 ax.axvline(Om,ls='--',c='r')
 ax.plot(*transformed(sol))
