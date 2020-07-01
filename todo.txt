@@ -1,3 +1,9 @@
+Short term
+----------
+- Label plots
 - Add more models
 
+Long term
+---------
 - Generalise dXdt to include cross-constants c1,c2,k1,k2?
+- Waterfall plots
