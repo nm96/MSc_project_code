@@ -51,10 +51,17 @@ def rotsolxy(sol,Omega):
     return np.array([np.cos(Omega*tt)*solx - np.sin(Omega*tt)*soly,
     np.sin(Omega*tt)*solx + np.cos(Omega*tt)*soly])
 
-def mod2dfft(sol):
+def transformed(sol):
+    """Calculate the logarithm of the combined absolute values of the fourier
+    transforms of a solution's x and y components. Returns the both the
+    transform result and the corresponding vector of frequencies.
+    """
+    N = len(sol.t)
+    max_freq = min(10,1/sol.t[1])
+    freq_scale = np.arange(0,max_freq,4*pi/sol.t[-1])
     solx = sol.y[0]
     soly = sol.y[2]
-    fftx = rfft(solx)
-    ffty = rfft(soly)
-    return (np.abs(fftx)**2 + np.abs(ffty)**2)**0.5
+    fftx = rfft(solx[N//2:])[:len(freq_scale)]
+    ffty = rfft(soly[N//2:])[:len(freq_scale)]
+    return (freq_scale, np.log((np.abs(fftx)**2 + np.abs(ffty)**2)**0.5))
 

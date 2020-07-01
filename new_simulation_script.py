@@ -18,14 +18,16 @@ c = 0.05 # Damping coefficient
 k = 10 # Stiffness coefficient
 h = 0.03 # Gap width
 
+Om_nat = (k/m)**0.5 # Shaft natural frequency
+
 model = (simple,(0,)) # Model-tuple for the trivial no-force model
 
 params = (eps,Om,m,c,k,h,model) # Package parameters into a tuple
     
 # Integrate the ODE system over a given time span with given initial conditions
 
-N = 2**15
-tspan = (0,1000)    
+N = 2**14
+tspan = (0,2**10)    
 tt = np.linspace(*tspan,N)
 X0 = [0.1,0,0,0]
 
@@ -33,15 +35,12 @@ sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 
 # Plot fft
 
-max_freq = 10
-freq_scale = np.arange(0,max_freq,4*pi/sol.t[-1])
-print(2*pi/sol.t[1])
-
 fn += 1; fig = plt.figure(fn)
 ax = fig.add_axes([.1,.1,.8,.8])
-ax.plot(freq_scale,np.log(np.abs(rfft(sol.y[0][N//2:])))[:len(freq_scale)])
+ax.axvline(Om_nat,ls='--',c='g')
+ax.axvline(Om,ls='--',c='r')
+ax.plot(*transformed(sol))
 plt.grid("on")
-
 
 # Integration with VdH model
 
@@ -59,13 +58,11 @@ sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 
 # Plot fft
 
-max_freq = 10
-freq_scale = np.arange(0,max_freq,4*pi/sol.t[-1])
-print(2*pi/sol.t[1])
-
 fn += 1; fig = plt.figure(fn)
 ax = fig.add_axes([.1,.1,.8,.8])
-ax.plot(freq_scale,np.log(np.abs(rfft(sol.y[0][N//2:])))[:len(freq_scale)])
+ax.axvline(Om_nat,ls='--',c='g')
+ax.axvline(Om,ls='--',c='r')
+ax.plot(*transformed(sol))
 plt.grid("on")
 
 plt.show()

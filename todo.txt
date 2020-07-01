@@ -1,4 +1,1 @@
-- Implement fft processing of solutions - create an fft function which also
-  outputs the relevant vector of frequencies for easier plotting.
-
 - Generalise dXdt to include cross-constants c1,c2,k1,k2
