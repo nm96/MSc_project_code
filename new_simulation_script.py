@@ -52,8 +52,6 @@ model = (VdH,(h,k_c)) # This is the standard form for a model;
 
 params = (eps,Om,m,c,k,h,model)
     
-# Integrate the ODE system over a given time span with given initial conditions
-
 sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 
 # Plot fft
