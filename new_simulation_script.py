@@ -12,11 +12,11 @@ fn = 0  # Initialize figure number for plotting
 
 # Define parameter values:
 eps = 0.0525 # Rotor eccentricity
-Om = 4.1 # Driving frequency
+Om = 6.1 # Driving frequency
 m = 10 # Mass (per unit length)
 c = 0.05 # Damping coefficient
 k = 10 # Stiffness coefficient
-h = 0.03 # Gap width
+h = 0.05 # Gap width
 
 Om_nat = (k/m)**0.5 # Shaft natural frequency
 
@@ -41,6 +41,13 @@ sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 # Plot spectrum:
 
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+ax.plot(*rotsolxy(sol,-Om))
+
+
+fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+ax.plot(*solxy(sol))
+
+fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
 
 ax.axvline(Om_nat,ls='--',c='g')
 ax.axvline(Om,ls='--',c='r')
@@ -55,7 +62,7 @@ ax.grid("on")
 # ---------------------
 
 # Define the model:
-k_c = 50 # Required model-specific parameter
+k_c = 100 # Required model-specific parameter
 model = (VdH,(h,k_c)) # This is the standard form for a model;
 # A tuple containing a model function with the form f(X,mparams) and a tuple
 # mparams of model parameters.
