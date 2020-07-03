@@ -29,7 +29,7 @@ params = (eps,Om,m,c,k,h,model) # Package parameters into a tuple
 tspan = (0,2**10)    
 N = tspan[1]*2**4
 tt = np.linspace(*tspan,N)
-X0 = [0.1,0,0,0]
+X0 = [0.1,0,-0.2,0]
 
 sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 
@@ -40,6 +40,9 @@ fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
 ax.axvline(Om_nat,ls='--',c='g')
 ax.axvline(Om,ls='--',c='r')
 ax.plot(*transformed(sol))
+ax.set_title("Log-fft spectrum for a solution with the trivial model")
+ax.set_xlabel("Frequency (Hz)")
+ax.set_ylabel("Log(fft(sol))")
 plt.grid("on")
 
 # Integration with VdH model
@@ -61,6 +64,9 @@ fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
 ax.axvline(Om_nat,ls='--',c='g')
 ax.axvline(Om,ls='--',c='r')
 ax.plot(*transformed(sol))
+ax.set_title("Log-fft spectrum for a solution with the Van der Heijden model")
+ax.set_xlabel("Frequency (Hz)")
+ax.set_ylabel("Log(fft(sol))")
 plt.grid("on")
 
 plt.show()
