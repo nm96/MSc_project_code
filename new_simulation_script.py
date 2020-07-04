@@ -41,11 +41,12 @@ sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 # Plot spectrum:
 
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
-ax.plot(*rotsolxy(sol,Om))
-
+ax.plot(*solxy(sol))
+ax.set_title("Solution trajectory in the stationary frame")
 
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
-ax.plot(*solxy(sol))
+ax.plot(*rotsolxy(sol,Om))
+ax.set_title("Solution trajectory in the rotating frame")
 
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
 
