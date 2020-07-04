@@ -36,20 +36,24 @@ def dXdt(t,X,eps,Omega,m,c,k,h,model):
 
 def solxy(sol):
     """Return an array of solution x and y values from a solution object 'sol'
-    produced by solve_ivp
+    produced by solve_ivp. Automatically removes transients (first half of the
+    time range)
     """
-    return sol.y[(0,2),:]
+    N = len(sol.t)
+    return sol.y[(0,2),N//2:]
 
 def rotsolxy(sol,Omega):
-    """Return an array of x and y solution values in a frame rotating at angular
-    velocity Omega. Requires a solution object 'sol' output by solve_ivp as
-    well as the relevant angular velocity.
+    """Return an array of x and y solution values in a frame rotating at
+    angular velocity Omega. Requires a solution object 'sol' output by
+    solve_ivp as well as the relevant angular velocity. Automatically removes
+    transients (first half of the time range).
     """
-    solx = sol.y[0]
-    soly = sol.y[2]
-    tt = sol.t
-    return np.array([np.cos(Omega*tt)*solx - np.sin(Omega*tt)*soly,
-    np.sin(Omega*tt)*solx + np.cos(Omega*tt)*soly])
+    N = len(sol.t)
+    solx = sol.y[0,N//2:]
+    soly = sol.y[2,N//2:]
+    tt = sol.t[N//2:]
+    return np.array([np.cos(Omega*tt)*solx + np.sin(Omega*tt)*soly,
+        - np.sin(Omega*tt)*solx + np.cos(Omega*tt)*soly])
 
 def transformed(sol):
     """Calculate the logarithm of the combined absolute values of the fourier
