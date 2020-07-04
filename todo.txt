@@ -1,5 +1,8 @@
 Short term
 ----------
+- On spatial plots, add a circle to indicate collision between rotor and
+  stator.
+
 - Add more models:
 	- Full Sommerfeld (3.4.2)
 	- Naive Half-Sommerfeld (3.4.3)
