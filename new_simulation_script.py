@@ -12,9 +12,9 @@ fn = 0  # Initialize figure number for plotting
 
 # Define parameter values:
 eps = 0.0525 # Rotor eccentricity
-Om = 6.1 # Driving frequency
+Om = 3.6 # Driving frequency
 m = 10 # Mass (per unit length)
-c = 0.05 # Damping coefficient
+c = 0.5 # Damping coefficient
 k = 10 # Stiffness coefficient
 h = 0.05 # Gap width
 
@@ -34,14 +34,14 @@ params = (eps,Om,m,c,k,h,model) # Package parameters into a tuple
 tspan = (0,2**10)    
 N = tspan[1]*2**4
 tt = np.linspace(*tspan,N)
-X0 = [0.1,0,-0.2,0]
+X0 = [0.001,0,-0.002,0]
 
 sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 
 # Plot spectrum:
 
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
-ax.plot(*rotsolxy(sol,-Om))
+ax.plot(*rotsolxy(sol,Om))
 
 
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
@@ -70,6 +70,15 @@ model = (VdH,(h,k_c)) # This is the standard form for a model;
 params = (eps,Om,m,c,k,h,model)
     
 sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
+
+# Plot solution in stationary frame:
+fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+ax.plot(*solxy(sol))
+
+# Plot solution in corotating frame:
+fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+ax.plot(*rotsolxy(sol,Om))
+
 
 # Plot spectrum:
 
