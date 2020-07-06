@@ -1,5 +1,3 @@
-# A script for integrating the Jeffcott equations using scipy's solve_ivp.
-
 import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.fft import rfft
@@ -61,11 +59,15 @@ sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
 ax.plot(*solxy(sol))
+ax.plot(h*cos(np.linspace(0,2*pi,1000)),h*sin(np.linspace(0,2*pi,1000)),c='r') 
+ax.set_aspect('equal')
 ax.set_title("Solution trajectory in the stationary frame")
 
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
 ax.plot(*rotsolxy(sol,Om))
-ax.set_title("Solution trajectory in the rotating frame")
+ax.plot(h*cos(np.linspace(0,2*pi,1000)),h*sin(np.linspace(0,2*pi,1000)),c='r') 
+ax.set_aspect('equal')
+ax.set_title("Solution trajectory in the co-rotating frame")
 
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
 
@@ -90,14 +92,16 @@ sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 # Plot solution in stationary frame:
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
 ax.plot(*solxy(sol))
-
-th = np.linspace(0,2*pi,1000)
-ax.plot(h*cos(th),h*sin(th),c='r') # Plotting the r=h circle for clarity
+ax.plot(h*cos(np.linspace(0,2*pi,1000)),h*sin(np.linspace(0,2*pi,1000)),c='r') 
+ax.set_aspect('equal')
+ax.set_title("Solution trajectory in the stationary frame")
 
 # Plot solution in corotating frame:
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
 ax.plot(*rotsolxy(sol,Om))
-ax.plot(h*cos(th),h*sin(th),c='r')
+ax.plot(h*cos(np.linspace(0,2*pi,1000)),h*sin(np.linspace(0,2*pi,1000)),c='r') 
+ax.set_aspect('equal')
+ax.set_title("Solution trajectory in the co-rotating frame")
 
 
 # Plot spectrum:
