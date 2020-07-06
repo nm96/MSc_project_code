@@ -10,6 +10,12 @@ from models import *
 
 fn = 0  # Initialize figure number for plotting
 
+# Rename basic functions and constants for clarity
+cos = np.cos
+sin = np.sin
+tanh = np.tanh
+pi = np.pi
+
 # Define parameter values:
 eps = 0.1 # Rotor eccentricity
 Om = 1.6 # Driving frequency
@@ -17,6 +23,8 @@ m = 1 # Mass (per unit length)
 c = 0.01 # Damping coefficient
 k = 0 # Stiffness coefficient
 h = 0.2 # Gap width
+
+k_c = 1 # Required model-specific parameter
 
 Om_nat = (k/m)**0.5 # Shaft natural frequency
 
@@ -34,7 +42,7 @@ params = (eps,Om,m,c,k,h,model) # Package parameters into a tuple
 tspan = (0,2**10)    
 N = tspan[1]*2**4
 tt = np.linspace(*tspan,N)
-X0 = [0.1,0,0,0]
+X0 = [0.01,0,0,0]
 
 sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 
@@ -63,11 +71,7 @@ ax.grid("on")
 # ---------------------
 
 # Define the model:
-k_c = 1 # Required model-specific parameter
-model = (VdH,(h,k_c)) # This is the standard form for a model;
-# A tuple containing a model function with the form f(X,mparams) and a tuple
-# mparams of model parameters.
-
+model = (VdH,(h,k_c))
 params = (eps,Om,m,c,k,h,model)
     
 sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
@@ -76,9 +80,13 @@ sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
 ax.plot(*solxy(sol))
 
+th = np.linspace(0,2*pi,1000)
+ax.plot(h*cos(th),h*sin(th),c='r')
+
 # Plot solution in corotating frame:
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
 ax.plot(*rotsolxy(sol,Om))
+ax.plot(h*cos(th),h*sin(th),c='r')
 
 
 # Plot spectrum:

@@ -28,8 +28,9 @@ def VdH(X,h,k_c):
     """
     x = X[0]
     y = X[2]
-    r= (x*x + y*y)**0.5
-    delta = (r-h)*(tanh(1000*(r-h))+1)/2
+    r = (x*x + y*y)**0.5
+    #delta = (r-h)*(tanh(1000*(r-h))+1)/2
+    delta = (r-h)*np.heaviside(r-h,0.5)
     return (k_c*delta,0)
 
 def NHSommerfeld(X,Omega,h,mu,b,R2):
