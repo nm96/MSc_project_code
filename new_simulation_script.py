@@ -37,6 +37,7 @@ alpha = 500 # for the Hua model
 mu = 0.1 # Coefficient of friction
 
 Om_nat = (k/m)**0.5 # Shaft natural frequency
+Om_nat_c = (k_c/m)**0.5 # 'In-contact' natural frequency
 
 
 # Trivial model
@@ -50,7 +51,7 @@ params = (eps,Om,m,c,k,h,model) # Package parameters into a tuple
 # conditions:
 
 tspan = (0,2**10)    
-N = tspan[1]*2**4
+N = tspan[1]*2**6
 tt = np.linspace(*tspan,N)
 X0 = [0.01,0,0,0]
 
@@ -91,7 +92,7 @@ fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
 ax.plot(*solxy(sol))
 
 th = np.linspace(0,2*pi,1000)
-ax.plot(h*cos(th),h*sin(th),c='r')
+ax.plot(h*cos(th),h*sin(th),c='r') # Plotting the r=h circle for clarity
 
 # Plot solution in corotating frame:
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
@@ -104,41 +105,10 @@ ax.plot(h*cos(th),h*sin(th),c='r')
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
 
 ax.axvline(Om_nat,ls='--',c='g')
+ax.axvline(Om_nat_c,ls='--',c='b')
 ax.axvline(Om,ls='--',c='r')
-ax.plot(*transformed(sol))
+ax.plot(*transformed(sol),c='k')
 ax.set_title("Log-fft spectrum for a solution with the Van der Heijden model")
-ax.set_xlabel("Frequency (Hz)")
-ax.set_ylabel("Log(fft(sol))")
-ax.grid("on")
-
-# Hua Model
-# ---------------------
-
-# Define the model:
-model = (Hua,(h,k_c,alpha,mu))
-params = (eps,Om,m,c,k,h,model)
-    
-sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
-
-# Plot solution in stationary frame:
-fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
-ax.plot(*solxy(sol))
-ax.plot(h*cos(th),h*sin(th),c='r')
-
-# Plot solution in corotating frame:
-fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
-ax.plot(*rotsolxy(sol,Om))
-ax.plot(h*cos(th),h*sin(th),c='r')
-
-
-# Plot spectrum:
-
-fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
-
-ax.axvline(Om_nat,ls='--',c='g')
-ax.axvline(Om,ls='--',c='r')
-ax.plot(*transformed(sol))
-ax.set_title("Log-fft spectrum for a solution with the Hua model")
 ax.set_xlabel("Frequency (Hz)")
 ax.set_ylabel("Log(fft(sol))")
 ax.grid("on")
