@@ -23,7 +23,11 @@ c = 0.5 # Damping coefficient
 k = 10 # Stiffness coefficient
 h = 0.1 # Gap width
 k_c = 50 # Stator stiffness parameter for models
-alpha = 500 # for the Hua model
-mu = 0.1 # Coefficient of friction
+
+mu = 1 # Viscosity
+b = 1 # Bearing length
+R2 = 1 # Radius
 
 Om_nat = (k/m)**0.5 # Shaft natural frequency
+
+
