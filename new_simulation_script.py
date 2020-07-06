@@ -41,12 +41,11 @@ Om_nat_c = (k_c/m)**0.5 # 'In-contact' natural frequency
 # Trivial model
 # -------------
 
+# Define the model:
 model = (simple,(0,)) 
-
 params = (eps,Om,m,c,k,h,model) # Package parameters into a tuple
     
-# Integrate the ODE system over a given time span with given initial
-# conditions:
+# Set conditions and time span, integrate
 
 tspan = (0,2**10)    
 N = tspan[1]*2**6

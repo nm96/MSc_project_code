@@ -33,6 +33,7 @@ def VdH(X,h,k_c):
 def Hua(X,h,k_c,alpha,mu):
     """Model function for the Hua model. Takes three parameters: h, k_c, alpha,
     mu.
+    REQUIRES A DIRECTION-DEPENDENT FRICTION FORCE!
     """
     x = X[0]
     y = X[2]

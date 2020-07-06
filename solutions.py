@@ -38,7 +38,7 @@ def dXdt(t,X,eps,Omega,m,c,k,h,model):
 def dXdt_old(t,X,eps,Omega,m,c,k,h,model):
     """Right hand side of the Jeffcott equations in first order form, to be
     passed to the numerical integrator 'solve_ivp'.
-    OLD VERSION
+    OLD (INCORRECT) VERSION
     """
     # Unpack the components of X:
     x,dx,y,dy = X
