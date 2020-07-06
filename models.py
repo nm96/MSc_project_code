@@ -52,7 +52,8 @@ def NHSommerfeld(X,Omega,h,mu,b,R2):
     a = r/h
     da = dr/h
     dpsi = (x*dy - y*dx)/r**2
-    fn = -(12*mu*b*R2**3/h**2)*(a**2*(Omega-2*dpsi)/((2+a**2)*(1-a**2)) +
-            da*(1-a**2)**(-1.5)*(pi/2 - 8/(2+a**2))
-    ft = (12*mu*b*R2**3/h**2)*(pi*a*(Omega-2*dpsi)/(2*(2+a**2)(1-a**2)**0.5) +
-        2*a*da/((2+a**2)*(1-a**2)))
+    fn = (-(12*mu*b*R2**3/h**2)*(a**2*(Omega-2*dpsi)/((2+a**2)*(1-a**2)) +
+        da*(1-a**2)**(-1.5)*(pi/2 - 8/(2+a**2))))
+    ft = ((12*mu*b*R2**3/h**2)*(pi*a*(Omega-2*dpsi)/(2*(2+a**2)*(1-a**2)**0.5) +
+        2*a*da/((2+a**2)*(1-a**2))))
+    return (fn,ft)

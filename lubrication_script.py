@@ -16,18 +16,55 @@ pi = np.pi
 
 # Define parameter values:
 
-eps = 0.0525 # Rotor eccentricity
+eps = 0.03 # Rotor eccentricity
 Om = 4.1 # Driving frequency
 m = 10 # Mass (per unit length)
-c = 0.5 # Damping coefficient
+c = 0.01 # Damping coefficient
 k = 10 # Stiffness coefficient
-h = 0.1 # Gap width
-k_c = 50 # Stator stiffness parameter for models
+h = 0.15 # Gap width
 
-mu = 1 # Viscosity
+mu = 10**-5 # Viscosity
 b = 1 # Bearing length
 R2 = 1 # Radius
 
 Om_nat = (k/m)**0.5 # Shaft natural frequency
 
+# Define the model:
+model = (NHSommerfeld,(Om,h,mu,b,R2))
+params = (eps,Om,m,c,k,h,model)
 
+tspan = (0,2**10)    
+N = tspan[1]*2**4
+tt = np.linspace(*tspan,N)
+X0 = [0.0001,0,0,0]
+
+sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
+
+# Plot solution in stationary frame:
+fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+ax.plot(*solxy(sol))
+ax.plot(h*cos(np.linspace(0,2*pi,1000)),h*sin(np.linspace(0,2*pi,1000)),c='r') 
+ax.set_aspect('equal')
+ax.set_title("Solution trajectory in the stationary frame")
+
+# Plot solution in corotating frame:
+fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+ax.plot(*rotsolxy(sol,Om))
+ax.plot(h*cos(np.linspace(0,2*pi,1000)),h*sin(np.linspace(0,2*pi,1000)),c='r') 
+ax.set_aspect('equal')
+ax.set_title("Solution trajectory in the co-rotating frame")
+
+
+# Plot spectrum:
+
+fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+
+ax.axvline(Om_nat,ls='--',c='g')
+ax.axvline(Om,ls='--',c='r')
+ax.plot(*transformed(sol),c='k')
+ax.set_title("Log-fft spectrum for a solution with the NHS lubrication model")
+ax.set_xlabel("Frequency (Hz)")
+ax.set_ylabel("Log(fft(sol))")
+ax.grid("on")
+
+plt.show()
