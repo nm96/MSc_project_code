@@ -1,7 +1,10 @@
 Short term
 ----------
+- Change VdH model to use the correct version of delta
+
 - Apply a transformation to retrieve the position of the centre of rotation
   rather than the centre of mass - i.e. the 'actual' rotor position.
+
 - On spatial plots, add a circle to indicate collision between rotor and
   stator.
 

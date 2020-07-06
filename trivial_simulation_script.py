@@ -10,9 +10,9 @@ fn = 0  # Initialize figure number for plotting
 
 # Define parameter values:
 eps = 0.0525 # Rotor eccentricity
-Om = 6.1 # Driving frequency
+Om = 4.1 # Driving frequency
 m = 10 # Mass (per unit length)
-c = 0.3 # Damping coefficient
+c = 0.05 # Damping coefficient
 k = 10 # Stiffness coefficient
 h = 0.05 # Gap width
 
@@ -29,10 +29,10 @@ params = (eps,Om,m,c,k,h,model) # Package parameters into a tuple
 # Integrate the ODE system over a given time span with given initial
 # conditions:
 
-tspan = (0,2**12)    
-N = tspan[1]*2**6
+tspan = (0,2**10)    
+N = tspan[1]*2**4
 tt = np.linspace(*tspan,N)
-X0 = [0.1,0,-0.2,0]
+X0 = [1,1,0,0]
 
 sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 

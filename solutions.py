@@ -17,6 +17,28 @@ pi = np.pi
 def dXdt(t,X,eps,Omega,m,c,k,h,model):
     """Right hand side of the Jeffcott equations in first order form, to be
     passed to the numerical integrator 'solve_ivp'.
+    NEW VERSION: The Jeffcott equations should describe the motion of the
+    rotor's geometric center rather than its center of mass.
+    """
+    # Unpack the components of X:
+    x,dx,y,dy = X
+    # Define r = distance from stator centre to rotor centre:
+    r = (x*x + y*y)**0.5
+    cPsi = x/r    # = np.cos(psi)
+    sPsi = y/r    # = np.sin(psi)
+    # Calculate radial and tangential forces using the given model:
+    fn, ft = model[0](X,*model[1])
+    # Convert these into forces in the x and y directions:
+    F_x = -fn*cPsi + ft*sPsi
+    F_y = -fn*sPsi - ft*cPsi
+    # Final result (1st order Jeffcott eqns):
+    return [dx, (F_x + eps*m*np.cos(Omega*t)*Omega**2 - c*dx - k*x)/m, dy, (F_y
+        + eps*m*np.sin(Omega*t)*Omega**2 - c*dy - k*y)/m]
+
+def dXdt_old(t,X,eps,Omega,m,c,k,h,model):
+    """Right hand side of the Jeffcott equations in first order form, to be
+    passed to the numerical integrator 'solve_ivp'.
+    OLD VERSION
     """
     # Unpack the components of X:
     x,dx,y,dy = X

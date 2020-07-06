@@ -76,7 +76,7 @@ def system(X,t):
         ft = mu * fn
     
     elif model == 'VDH':
-        # Van der Heijden - slightly different r and delta
+        # Van der Heijden - slightly different r and delta (why??)
         r_H = (x*x + y*y)**0.5
         delta_H = (r_H - h)*(tanh(1000*(r_H-h))+1)/2
         fn = k_c * delta_H

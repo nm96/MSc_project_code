@@ -28,9 +28,9 @@ def VdH(X,h,k_c):
     """
     x = X[0]
     y = X[2]
-    r_H = (x*x + y*y)**0.5
-    delta_H = (r_H-h)*(tanh(1000*(r_H-h))+1)/2
-    return (k_c*delta_H,0)
+    r= (x*x + y*y)**0.5
+    delta = (r-h)*(tanh(1000*(r-h))+1)/2
+    return (k_c*delta,0)
 
 def NHSommerfeld(X,Omega,h,mu,b,R2):
     """Model function for the Naive Half-Sommerfeld lubrication model. See
