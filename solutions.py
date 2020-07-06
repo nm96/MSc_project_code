@@ -77,10 +77,30 @@ def rotsolxy(sol,Omega):
     return np.array([np.cos(Omega*tt)*solx + np.sin(Omega*tt)*soly,
         - np.sin(Omega*tt)*solx + np.cos(Omega*tt)*soly])
 
+def solxy2(sol):
+    """Return an array of solution x and y values from a solution object 'sol'
+    produced by solve_ivp. This version keeps transients.
+    """
+    N = len(sol.t)
+    return sol.y[(0,2),:]
+
+def rotsolxy2(sol,Omega):
+    """Return an array of x and y solution values in a frame rotating at
+    angular velocity Omega. Requires a solution object 'sol' output by
+    solve_ivp as well as the relevant angular velocity. This version keeps
+    transients.
+    """
+    N = len(sol.t)
+    solx = sol.y[0]
+    soly = sol.y[2]
+    tt = sol.t
+    return np.array([np.cos(Omega*tt)*solx + np.sin(Omega*tt)*soly,
+        - np.sin(Omega*tt)*solx + np.cos(Omega*tt)*soly])
+
 def transformed(sol):
     """Calculate the logarithm of the combined absolute values of the fourier
-    transforms of a solution's x and y components. Returns the both the
-    transform result and the corresponding vector of frequencies.
+    transforms of a solution's x and y components. Returns both the transform
+    result and the corresponding vector of frequencies.  
     """
     N = len(sol.t)
     max_freq = min(10,1/sol.t[1])
@@ -90,4 +110,3 @@ def transformed(sol):
     fftx = rfft(solx[N//2:])[:len(freq_scale)]
     ffty = rfft(soly[N//2:])[:len(freq_scale)]
     return (freq_scale, np.log((np.abs(fftx)**2 + np.abs(ffty)**2)**0.5))
-

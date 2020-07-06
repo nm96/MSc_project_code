@@ -21,7 +21,7 @@ Om = 4.1 # Driving frequency
 m = 10 # Mass (per unit length)
 c = 0.01 # Damping coefficient
 k = 10 # Stiffness coefficient
-h = 0.15 # Gap width
+h = 0.18 # Gap width
 
 mu = 10**-5 # Viscosity
 b = 1 # Bearing length
@@ -34,7 +34,7 @@ model = (NHSommerfeld,(Om,h,mu,b,R2))
 params = (eps,Om,m,c,k,h,model)
 
 tspan = (0,2**10)    
-N = tspan[1]*2**4
+N = tspan[1]*2**6
 tt = np.linspace(*tspan,N)
 X0 = [0.0001,0,0,0]
 
@@ -42,14 +42,14 @@ sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 
 # Plot solution in stationary frame:
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
-ax.plot(*solxy(sol))
+ax.plot(*solxy2(sol))
 ax.plot(h*cos(np.linspace(0,2*pi,1000)),h*sin(np.linspace(0,2*pi,1000)),c='r') 
 ax.set_aspect('equal')
 ax.set_title("Solution trajectory in the stationary frame")
 
 # Plot solution in corotating frame:
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
-ax.plot(*rotsolxy(sol,Om))
+ax.plot(*rotsolxy2(sol,Om))
 ax.plot(h*cos(np.linspace(0,2*pi,1000)),h*sin(np.linspace(0,2*pi,1000)),c='r') 
 ax.set_aspect('equal')
 ax.set_title("Solution trajectory in the co-rotating frame")
