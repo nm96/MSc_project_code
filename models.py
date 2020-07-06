@@ -17,21 +17,28 @@ pi = np.pi
 def simple(X,dmy):
     """Model function for the trivial no-forcing model. Dummy parameter
     included in order to fit the convention for model-passing.
-    Returns the tuple (fn,ft) = (normal force, tangential force).
     """
     return (0,0)
 
 def VdH(X,h,k_c):
     """Model function for the Van der Heijden model. Takes two parameters h and
     k_c, with the latter being model-specific
-    Returns the tuple (fn,ft) = (normal force, tangential force).
     """
     x = X[0]
     y = X[2]
     r = (x*x + y*y)**0.5
-    #delta = (r-h)*(tanh(1000*(r-h))+1)/2
     delta = (r-h)*np.heaviside(r-h,0.5)
     return (k_c*delta,0)
+
+def Hua(X,h,k_c,alpha,mu):
+    """Model function for the Hua model. Takes three parameters: h, k_c, alpha,
+    mu.
+    """
+    x = X[0]
+    y = X[2]
+    r = (x*x + y*y)**0.5
+    delta = (r-h)*np.heaviside(r-h,0.5)
+    return (k_c*delta + alpha*delta**2,mu*(k_c*delta + alpha*delta**2))
 
 def NHSommerfeld(X,Omega,h,mu,b,R2):
     """Model function for the Naive Half-Sommerfeld lubrication model. See

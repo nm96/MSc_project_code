@@ -16,15 +16,25 @@ sin = np.sin
 tanh = np.tanh
 pi = np.pi
 
-# Define parameter values:
-eps = 0.1 # Rotor eccentricity
-Om = 1.6 # Driving frequency
-m = 1 # Mass (per unit length)
-c = 0.01 # Damping coefficient
-k = 0 # Stiffness coefficient
-h = 0.2 # Gap width
+#Define parameter values:
+#eps = 0.1 # Rotor eccentricity
+#Om = 1.6 # Driving frequency
+#m = 1 # Mass (per unit length)
+#c = 0.01 # Damping coefficient
+#k = 0 # Stiffness coefficient
+#h = 0.2 # Gap width
 
-k_c = 1 # Required model-specific parameter
+# Define parameter values:
+eps = 0.0525 # Rotor eccentricity
+Om = 4.1 # Driving frequency
+m = 10 # Mass (per unit length)
+c = 0.5 # Damping coefficient
+k = 10 # Stiffness coefficient
+h = 0.1 # Gap width
+
+k_c = 50 # Stator stiffness parameter for models
+alpha = 500 # for the Hua model
+mu = 0.1 # Coefficient of friction
 
 Om_nat = (k/m)**0.5 # Shaft natural frequency
 
@@ -97,6 +107,38 @@ ax.axvline(Om_nat,ls='--',c='g')
 ax.axvline(Om,ls='--',c='r')
 ax.plot(*transformed(sol))
 ax.set_title("Log-fft spectrum for a solution with the Van der Heijden model")
+ax.set_xlabel("Frequency (Hz)")
+ax.set_ylabel("Log(fft(sol))")
+ax.grid("on")
+
+# Hua Model
+# ---------------------
+
+# Define the model:
+model = (Hua,(h,k_c,alpha,mu))
+params = (eps,Om,m,c,k,h,model)
+    
+sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
+
+# Plot solution in stationary frame:
+fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+ax.plot(*solxy(sol))
+ax.plot(h*cos(th),h*sin(th),c='r')
+
+# Plot solution in corotating frame:
+fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+ax.plot(*rotsolxy(sol,Om))
+ax.plot(h*cos(th),h*sin(th),c='r')
+
+
+# Plot spectrum:
+
+fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+
+ax.axvline(Om_nat,ls='--',c='g')
+ax.axvline(Om,ls='--',c='r')
+ax.plot(*transformed(sol))
+ax.set_title("Log-fft spectrum for a solution with the Hua model")
 ax.set_xlabel("Frequency (Hz)")
 ax.set_ylabel("Log(fft(sol))")
 ax.grid("on")
