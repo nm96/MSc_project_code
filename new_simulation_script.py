@@ -11,12 +11,12 @@ from models import *
 fn = 0  # Initialize figure number for plotting
 
 # Define parameter values:
-eps = 0.0525 # Rotor eccentricity
-Om = 3.6 # Driving frequency
-m = 10 # Mass (per unit length)
-c = 0.5 # Damping coefficient
-k = 10 # Stiffness coefficient
-h = 0.05 # Gap width
+eps = 0.1 # Rotor eccentricity
+Om = 1.6 # Driving frequency
+m = 1 # Mass (per unit length)
+c = 0.01 # Damping coefficient
+k = 0 # Stiffness coefficient
+h = 0.2 # Gap width
 
 Om_nat = (k/m)**0.5 # Shaft natural frequency
 
@@ -34,7 +34,7 @@ params = (eps,Om,m,c,k,h,model) # Package parameters into a tuple
 tspan = (0,2**10)    
 N = tspan[1]*2**4
 tt = np.linspace(*tspan,N)
-X0 = [0.001,0,-0.002,0]
+X0 = [0.1,0,0,0]
 
 sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
 
@@ -63,7 +63,7 @@ ax.grid("on")
 # ---------------------
 
 # Define the model:
-k_c = 100 # Required model-specific parameter
+k_c = 1 # Required model-specific parameter
 model = (VdH,(h,k_c)) # This is the standard form for a model;
 # A tuple containing a model function with the form f(X,mparams) and a tuple
 # mparams of model parameters.
