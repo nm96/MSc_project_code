@@ -21,7 +21,7 @@ Om = 4.1 # Driving frequency
 m = 10 # Mass (per unit length)
 c = 0.01 # Damping coefficient
 k = 10 # Stiffness coefficient
-h = 0.18 # Gap width
+h = 0.16 # Gap width
 
 mu = 10**-5 # Viscosity
 b = 1 # Bearing length
