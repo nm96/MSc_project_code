@@ -2,7 +2,7 @@ Short term
 ----------
 - Add more models:
 	- Full Sommerfeld (3.4.2)
-	- Naive Half-Sommerfeld (3.4.3)
+	- Naive Half-Sommerfeld (3.4.3) (x)
 	- Dynamic Half-Sommerfeld (3.4.4)
 	- One of the other friction-based models?
 	- Some kind of idealized artificial nonlinearity?
