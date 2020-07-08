@@ -45,12 +45,12 @@ Om_nat = (k/m)**0.5 # Shaft natural frequency
 model = (NHSommerfeld,(Om,h,mu,b,R2))
 params = (eps,Om,m,c,k,h,model)
 
-tspan = (0,2**12)    
-N = tspan[1]*2**7
+tspan = (0,2**10)    
+N = tspan[1]*2**6
 tt = np.linspace(*tspan,N)
 X0 = [0.0001,0,0,0]
 
-sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
+sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
 
 # Plot solution in stationary frame:
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
