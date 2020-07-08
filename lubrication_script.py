@@ -1,3 +1,6 @@
+# Lubrication Script
+# ------------------
+
 import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.fft import rfft
