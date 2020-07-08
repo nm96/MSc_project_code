@@ -26,7 +26,7 @@ pi = np.pi
 eps = 0.0525 # Rotor eccentricity
 Om = 4.1 # Driving frequency
 m = 10 # Mass (per unit length)
-c = 0.5 # Damping coefficient
+c = 0.05 # Damping coefficient
 k = 10 # Stiffness coefficient
 h = 0.1 # Gap width
 
@@ -52,7 +52,7 @@ N = tspan[1]*2**6
 tt = np.linspace(*tspan,N)
 X0 = [0.01,0,0,0]
 
-sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
+sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
 
 # Plot spectrum:
 
@@ -86,7 +86,7 @@ ax.grid("on")
 model = (VdH,(h,k_c))
 params = (eps,Om,m,c,k,h,model)
     
-sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
+sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
 
 # Plot solution in stationary frame:
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
