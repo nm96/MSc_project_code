@@ -1,3 +1,6 @@
+# New Script - includes Trivial and Van der Heijden models.
+# ---------------------------------------------------------
+
 import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.fft import rfft
