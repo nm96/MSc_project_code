@@ -16,29 +16,28 @@ pi = np.pi
 
 # Define parameter values:
 
-#eps = 0.03 # Rotor eccentricity
-#Om = 4.1 # Driving frequency
-#m = 10 # Mass (per unit length)
-#c = 0.01 # Damping coefficient
-#k = 10 # Stiffness coefficient
-#h = 0.16 # Gap width
-#mu = 10**-5 # Viscosity
-#b = 1 # Bearing length
-#R2 = 1 # Radius
+eps = 0.03 # Rotor eccentricity
+Om = 4.1 # Driving frequency
+m = 10 # Mass (per unit length)
+c = 0.01 # Damping coefficient
+k = 10 # Stiffness coefficient
+h = 0.16 # Gap width
+mu = 10**-5 # Viscosity
+b = 1 # Bearing length
+R2 = 1 # Radius
 
 # Parameter values from Flores 2009
 
-h = 0.2*10**-3 # Clearance (m)
-b = 40*10**-3 # Bearing length (m)
-R2 = 9.8*10**-3 # Journal Radius (m)
-mu = 4 # Oil Viscosity (Pascals) - at 40C 
-m = 0.13 # Journal mass (kg) - big ?? on this one..
-
-k = 10 # ??
-c = 1 # ??
-eps = 0.03
-Om = 4.1
-
+#h = 0.2*10**-3 # Clearance (m)
+#b = 40*10**-3 # Bearing length (m)
+#R2 = 9.8*10**-3 # Journal Radius (m)
+#mu = 4 # Oil Viscosity (Pascals) - at 40C 
+#m = 0.13 # Journal mass (kg) - big ?? on this one..
+#k = 10 # ??
+#c = 1 # ??
+#eps = 0.3
+#Om = 4.1
+#
 
 Om_nat = (k/m)**0.5 # Shaft natural frequency
 
@@ -46,8 +45,8 @@ Om_nat = (k/m)**0.5 # Shaft natural frequency
 model = (NHSommerfeld,(Om,h,mu,b,R2))
 params = (eps,Om,m,c,k,h,model)
 
-tspan = (0,2**10)    
-N = tspan[1]*2**6
+tspan = (0,2**12)    
+N = tspan[1]*2**7
 tt = np.linspace(*tspan,N)
 X0 = [0.0001,0,0,0]
 
