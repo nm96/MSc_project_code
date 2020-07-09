@@ -5,10 +5,12 @@ import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.fft import rfft
 import matplotlib.pyplot as plt
+import time
 
 from solutions import *
 from models import *
 
+t0 = time.time()
 fn = 0  # Initialize figure number for plotting
 
 # Rename basic functions and constants for clarity
@@ -82,4 +84,6 @@ ax.set_xlabel("Frequency (Hz)")
 ax.set_ylabel("Log(fft(sol))")
 ax.grid("on")
 
+tf = time.time()
+print("T = {:.2f}s".format(tf-t0))
 plt.show()

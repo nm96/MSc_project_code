@@ -5,10 +5,12 @@ import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.fft import rfft
 import matplotlib.pyplot as plt
+import time
 
 from solutions import *
 from models import *
 
+t0 = time.time()
 fn = 0  # Initialize figure number for plotting
 
 # Rename basic functions and constants for clarity
@@ -18,7 +20,7 @@ tanh = np.tanh
 pi = np.pi
 
 # Define parameter values:
-eps = 0.18 # Rotor eccentricity
+eps = 0.14 # Rotor eccentricity
 Om = 3.1 # Driving frequency
 m = 10 # Mass (per unit length)
 c = 0.05 # Damping coefficient
@@ -35,7 +37,7 @@ model = (VdH,(h,k_c))
 params = (eps,Om,m,c,k,h,model)
     
 # Integrate
-tspan = (0,2**10)    
+tspan = (0,2**9)    
 N = tspan[1]*2**6
 tt = np.linspace(*tspan,N)
 X0 = [0.01,0,0,0]
@@ -68,5 +70,8 @@ ax.set_title("Log-fft spectrum for a solution with the Van der Heijden model")
 ax.set_xlabel("Frequency (Hz)")
 ax.set_ylabel("Log(fft(sol))")
 ax.grid("on")
+
+tf = time.time()
+print("T = {:.2f}s".format(tf-t0))
 
 plt.show()

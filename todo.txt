@@ -3,13 +3,12 @@ Short term
 - Add more models:
 	- Full Sommerfeld (3.4.2)
 	- Naive Half-Sommerfeld (3.4.3) (x)
-	- Dynamic Half-Sommerfeld (3.4.4)
-	- One of the other friction-based models?
+	- One of the friction-based models?
 	- Some kind of idealized artificial nonlinearity?
 
 - Proper LaTeX labelling of plots
+- Waterfall plots
 
 Long term
 ---------
 - Generalise dXdt to include cross-constants c1,c2,k1,k2?
-- Waterfall plots
