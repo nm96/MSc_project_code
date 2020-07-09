@@ -27,8 +27,8 @@ m = 10 # Mass (per unit length)
 c = 0.5 # Damping coefficient
 k = 10 # Stiffness coefficient
 h = 1 # Gap width
-mu = 10**-7 # Viscosity
-b = 1 # Bearing length
+mu = 1*10**-7 # Viscosity
+b = 0.1 # Bearing length
 R2 = 100 # Radius
 
 # Parameter values from Flores 2009
