@@ -18,7 +18,7 @@ tanh = np.tanh
 pi = np.pi
 
 # Define parameter values:
-eps = 0.3# Rotor eccentricity
+eps = 0.18 # Rotor eccentricity
 Om = 3.1 # Driving frequency
 m = 10 # Mass (per unit length)
 c = 0.05 # Damping coefficient
@@ -29,9 +29,6 @@ k_c = 50 # Stator stiffness parameter for VdH model
 Om_nat = (k/m)**0.5 # Shaft natural frequency
 Om_nat_c = (k_c/m)**0.5 # 'In-contact' natural frequency
 
-
-# Van der Heijden Model
-# ---------------------
 
 # Define the model:
 model = (VdH,(h,k_c))
