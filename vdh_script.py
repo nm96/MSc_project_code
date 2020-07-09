@@ -17,21 +17,13 @@ sin = np.sin
 tanh = np.tanh
 pi = np.pi
 
-#Define parameter values:
-#eps = 0.1 # Rotor eccentricity
-#Om = 1.6 # Driving frequency
-#m = 1 # Mass (per unit length)
-#c = 0.01 # Damping coefficient
-#k = 0 # Stiffness coefficient
-#h = 0.2 # Gap width
-
 # Define parameter values:
-eps = 0.0525 # Rotor eccentricity
+eps = 0.3# Rotor eccentricity
 Om = 3.1 # Driving frequency
 m = 10 # Mass (per unit length)
-c = 0.5 # Damping coefficient
+c = 0.05 # Damping coefficient
 k = 1 # Stiffness coefficient
-h = 0.1 # Gap width
+h = 1 # Gap width
 k_c = 50 # Stator stiffness parameter for VdH model
 
 Om_nat = (k/m)**0.5 # Shaft natural frequency
