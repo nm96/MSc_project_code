@@ -19,15 +19,15 @@ pi = np.pi
 
 # Define parameter values:
 
-eps = 0.03 # Rotor eccentricity
+eps = 0.2 # Rotor eccentricity
 Om = 4.1 # Driving frequency
 m = 10 # Mass (per unit length)
-c = 0.01 # Damping coefficient
+c = 0.5 # Damping coefficient
 k = 10 # Stiffness coefficient
-h = 0.16 # Gap width
-mu = 10**-5 # Viscosity
+h = 1 # Gap width
+mu = 10**-7 # Viscosity
 b = 1 # Bearing length
-R2 = 1 # Radius
+R2 = 100 # Radius
 
 # Parameter values from Flores 2009
 
