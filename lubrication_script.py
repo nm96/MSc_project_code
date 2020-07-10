@@ -31,19 +31,6 @@ mu = 1*10**-7 # Viscosity
 b = 0.1 # Bearing length
 R2 = 100 # Radius
 
-# Parameter values from Flores 2009
-
-#h = 0.2*10**-3 # Clearance (m)
-#b = 40*10**-3 # Bearing length (m)
-#R2 = 9.8*10**-3 # Journal Radius (m)
-#mu = 4 # Oil Viscosity (Pascals) - at 40C 
-#m = 0.13 # Journal mass (kg) - big ?? on this one..
-#k = 10 # ??
-#c = 1 # ??
-#eps = 0.3
-#Om = 4.1
-#
-
 Om_nat = (k/m)**0.5 # Shaft natural frequency
 
 # Define the model:
@@ -73,9 +60,7 @@ ax.set_title("Solution trajectory in the co-rotating frame")
 
 
 # Plot spectrum:
-
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
-
 ax.axvline(Om_nat,ls='--',c='g')
 ax.axvline(Om,ls='--',c='r')
 ax.plot(*transformed(sol),c='k')
@@ -83,6 +68,23 @@ ax.set_title("Log-fft spectrum for a solution with the NHS lubrication model")
 ax.set_xlabel("Frequency (Hz)")
 ax.set_ylabel("Log(fft(sol))")
 ax.grid("on")
+
+# Define the model (second version):
+
+for B in [0.2,1.0,1.5][::-1]: # New 'general' parameter for lubrication model
+    model = (NHSommerfeld2,(Om,h,B))
+    params = (eps,Om,m,c,k,h,model)
+    sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
+    # Plot spectrum:
+    fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+    ax.axvline(Om_nat,ls='--',c='g')
+    ax.axvline(Om,ls='--',c='r')
+    ax.plot(*transformed(sol),c='k')
+    ax.set_title("""Log-fft spectrum for a solution with the NHS lubrication
+            model, Beta = {}""".format(B))
+    ax.set_xlabel("Frequency (Hz)")
+    ax.set_ylabel("Log(fft(sol))")
+    ax.grid("on")
 
 tf = time.time()
 print("T = {:.2f}s".format(tf-t0))

@@ -57,3 +57,20 @@ def NHSommerfeld(X,Omega,h,mu,b,R2):
     ft = ((12*mu*b*R2**3/h**2)*(pi*a*(Omega-2*dpsi)/(2*(2+a**2)*(1-a**2)**0.5) +
         2*a*da/((2+a**2)*(1-a**2))))
     return (fn,ft)
+
+def NHSommerfeld2(X,Omega,h,B):
+    """Model function for the Naive Half-Sommerfeld lubrication model. See
+    preliminary report 3.4.3 for details. Takes global parameters Omega and h
+    along with model-specific parameter B
+    """
+    x,dx,y,dy = X
+    r = (x*x + y*y)**0.5
+    dr = (x*dx + y*dy)/r
+    a = r/h
+    da = dr/h
+    dpsi = (x*dy - y*dx)/r**2
+    fn = (-(B/h**2)*(a**2*(Omega-2*dpsi)/((2+a**2)*(1-a**2)) +
+        da*(1-a**2)**(-1.5)*(pi/2 - 8/(2+a**2))))
+    ft = ((B/h**2)*(pi*a*(Omega-2*dpsi)/(2*(2+a**2)*(1-a**2)**0.5) +
+        2*a*da/((2+a**2)*(1-a**2))))
+    return (fn,ft)
