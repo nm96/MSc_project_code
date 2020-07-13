@@ -42,41 +42,45 @@ N = tspan[1]*2**6
 tt = np.linspace(*tspan,N)
 X0 = [0.0001,0,0,0]
 
-sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
-
-# Plot solution in stationary frame:
-fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
-ax.plot(*solxy2(sol))
-ax.plot(h*cos(np.linspace(0,2*pi,1000)),h*sin(np.linspace(0,2*pi,1000)),c='r') 
-ax.set_aspect('equal')
-ax.set_title("Solution trajectory in the stationary frame")
-
-# Plot solution in corotating frame:
-fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
-ax.plot(*rotsolxy2(sol,Om))
-ax.plot(h*cos(np.linspace(0,2*pi,1000)),h*sin(np.linspace(0,2*pi,1000)),c='r') 
-ax.set_aspect('equal')
-ax.set_title("Solution trajectory in the co-rotating frame")
-
-
-# Plot spectrum:
-fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
-ax.axvline(Om_nat,ls='--',c='g')
-ax.axvline(Om,ls='--',c='r')
-ax.plot(*transformed(sol),c='k')
-ax.set_title("Log-fft spectrum for a solution with the NHS lubrication model")
-ax.set_xlabel("Frequency (Hz)")
-ax.set_ylabel("Log(fft(sol))")
-ax.grid("on")
+#sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
+#
+## Plot solution in stationary frame:
+#fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+#ax.plot(*solxy2(sol))
+#ax.plot(h*cos(np.linspace(0,2*pi,1000)),h*sin(np.linspace(0,2*pi,1000)),c='r') 
+#ax.set_aspect('equal')
+#ax.set_title("Solution trajectory in the stationary frame")
+#
+## Plot solution in corotating frame:
+#fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+#ax.plot(*rotsolxy2(sol,Om))
+#ax.plot(h*cos(np.linspace(0,2*pi,1000)),h*sin(np.linspace(0,2*pi,1000)),c='r') 
+#ax.set_aspect('equal')
+#ax.set_title("Solution trajectory in the co-rotating frame")
+#
+#
+## Plot spectrum:
+#fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+#ax.axvline(Om_nat,ls='--',c='g')
+#ax.axvline(Om,ls='--',c='r')
+#ax.plot(*transformed(sol),c='k')
+#ax.set_title("Log-fft spectrum for a solution with the NHS lubrication model")
+#ax.set_xlabel("Frequency (Hz)")
+#ax.set_ylabel("Log(fft(sol))")
+#ax.grid("on")
 
 # Define the model (second version):
+fn += 1; fig = plt.figure(fn)
+spn = 230
 
-for B in [0.2,1.0,1.5][::-1]: # New 'general' parameter for lubrication model
+#for B in np.linspace(1.25,1.50,6): 
+for B in [0.15, 0.65, 1.10, 1.35, 1.40, 1.65]:
     model = (NHSommerfeld2,(Om,h,B))
     params = (eps,Om,m,c,k,h,model)
-    sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params)
+    sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
     # Plot spectrum:
-    fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
+    spn += 1
+    ax = fig.add_subplot(spn)
     ax.axvline(Om_nat,ls='--',c='g')
     ax.axvline(Om,ls='--',c='r')
     ax.plot(*transformed(sol),c='k')
