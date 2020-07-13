@@ -3,9 +3,15 @@ from scipy.integrate import solve_ivp
 from scipy.fft import rfft
 import matplotlib.pyplot as plt
 import time
-
 from solutions import *
 from models import *
+from matplotlib import rc
+import sys
+
+# Set a nice font for the plots when on Linux
+if sys.platform == 'linux':
+    rc('font',**{'family':'serif','serif':['Computer Modern Roman']})
+    rc('text', usetex=True)
 
 t0 = time.time()
 fn = 0  # Initialize figure number for plotting
@@ -39,7 +45,7 @@ N = tspan[1]*2**6
 tt = np.linspace(*tspan,N)
 X0 = [0.0001,0,0,0]
 
-fn += 1; fig = plt.figure(fn)
+fn += 1; fig = plt.figure(fn,figsize=[6,9])
 spn = 320
 
 for B in [0.15, 0.80, 1.30, 1.35, 1.40, 1.65]:
@@ -52,11 +58,12 @@ for B in [0.15, 0.80, 1.30, 1.35, 1.40, 1.65]:
     ax.axvline(Om_nat,ls='--',c='g')
     ax.axvline(Om,ls='--',c='r')
     ax.plot(*transformed(sol),c='k')
-    ax.set_title("""Beta = {}""".format(B))
-    ax.set_xlabel("Frequency (Hz)")
-    ax.set_ylabel("Log(fft(sol))")
+    ax.set_title(r"""$\beta$ = {}""".format(B))
+    ax.set_xlabel("frequency (Hz)")
+    ax.set_ylabel("log(fft(sol))")
     ax.grid("on")
 
+plt.tight_layout()
 fig.savefig("../report/lub_spec.eps")
 
 tf = time.time()

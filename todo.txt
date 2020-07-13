@@ -12,6 +12,5 @@ Long term
 	- One of the friction-based models?
 	- Some kind of idealized artificial nonlinearity?
 
-- Proper LaTeX labelling of plots
-- Waterfall plots
+- Waterfall/heatmap plots?
 
