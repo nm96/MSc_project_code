@@ -86,6 +86,8 @@ for B in [0.2,1.0,1.5][::-1]: # New 'general' parameter for lubrication model
     ax.set_ylabel("Log(fft(sol))")
     ax.grid("on")
 
+fig.savefig("../report/lub_spec.eps")
+
 tf = time.time()
 print("T = {:.2f}s".format(tf-t0))
 plt.show()
