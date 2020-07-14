@@ -2,6 +2,7 @@ Short term
 ----------
 - Produce spectral plots across a range of parameters to illustrate
   interesting phenomena in Lubrication and VdH models.
+- Waterfall/heatmap plots?
 
 Long term
 ---------
@@ -11,6 +12,3 @@ Long term
 	- Dynamic Half-Sommerfeld (3.4.4) 
 	- One of the friction-based models?
 	- Some kind of idealized artificial nonlinearity?
-
-- Waterfall/heatmap plots?
-
