@@ -44,7 +44,7 @@ N = tspan[1]*2**6
 tt = np.linspace(*tspan,N)
 X0 = [0.01,0,0,0]
 
-for eps in [0.3,0.35,0.4]:
+for eps in [0.12, 0.2, 0.30, 0.35, 0.38]:
     print(eps)
     params = (eps,Om,m,c,k,h,model)
     sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
@@ -54,7 +54,7 @@ for eps in [0.3,0.35,0.4]:
     ax.axvline(Om_nat,ls='--',c='g')
     ax.axvline(Om,ls='--',c='r')
     ax.plot(*transformed(sol),c='k')
-    ax.set_title(r"""$\epsilon = {}$""".format(eps))
+    ax.set_title(r"""$\varepsilon = {:.2f}$""".format(eps))
     ax.set_xlabel("Frequency (Hz)")
     ax.set_ylabel("Log(fft(sol))")
     ax.grid("on")

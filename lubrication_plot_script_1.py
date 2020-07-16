@@ -58,9 +58,9 @@ for B in [0.15, 0.80, 1.30, 1.35, 1.40, 1.65]:
     ax.axvline(Om_nat,ls='--',c='g')
     ax.axvline(Om,ls='--',c='r')
     ax.plot(*transformed(sol),c='k')
-    ax.set_title(r"""$\beta$ = {}""".format(B))
-    ax.set_xlabel("frequency (Hz)")
-    ax.set_ylabel("log(fft(sol))")
+    ax.set_title(r"""$\beta$ = {:.2f}""".format(B))
+    ax.set_ylabel("$\log|\mathcal{F}[X]|$")
+    ax.set_xlabel("$\omega \ (s^{-1})$")
     ax.grid("on")
 
 plt.tight_layout()
