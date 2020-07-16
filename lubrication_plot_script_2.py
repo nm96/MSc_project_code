@@ -48,7 +48,7 @@ X0 = [0.0001,0,0,0]
 fn += 1; fig = plt.figure(fn,figsize=[6,9])
 spn = 220
 
-for B in [0.00, 0.033, 0.066, 0.10]:
+for B in [0.00, 0.06, 0.08, 0.10]:
     model = (NHSommerfeld2,(Om,h,B))
     params = (eps,Om,m,c,k,h,model)
     sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
@@ -64,7 +64,7 @@ for B in [0.00, 0.033, 0.066, 0.10]:
     ax.grid("on")
 
 plt.tight_layout()
-fig.savefig("../report/lub_spec.eps")
+fig.savefig("../report/results1_fig1.eps")
 
 tf = time.time()
 print("T = {:.2f}s".format(tf-t0))

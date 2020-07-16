@@ -64,7 +64,7 @@ for B in [0.15, 0.80, 1.30, 1.35, 1.40, 1.65]:
     ax.grid("on")
 
 plt.tight_layout()
-fig.savefig("../report/lub_spec.eps")
+fig.savefig("../report/results1_fig2.eps")
 
 tf = time.time()
 print("T = {:.2f}s".format(tf-t0))
