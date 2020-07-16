@@ -20,7 +20,7 @@ c = 1 # ??
 eps = 0.3
 Om = 4.1
 
-beta = 12*mu*b*R2**3/h**2
+beta = 12*mu*b*R2**3
 
 print("Flores Beta = {:.4f}".format(beta))
 
@@ -36,6 +36,6 @@ mu = 10**-7 # Viscosity
 b = 1 # Bearing length
 R2 = 100 # Radius
 
-beta = 12*mu*b*R2**3/h**2
+beta = 12*mu*b*R2**3
 
 print("Critical Beta = {:.4f}".format(beta))

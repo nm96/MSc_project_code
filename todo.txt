@@ -1,5 +1,7 @@
 Short term
 ----------
+- Edit the dXdt function (and its implementations) so that h is no longer
+  taken as a primary parameter.
 - Produce spectral plots across a range of parameters to illustrate
   interesting phenomena in Lubrication and VdH models.
 - Waterfall/heatmap plots?
