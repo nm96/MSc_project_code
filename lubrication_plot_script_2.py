@@ -45,7 +45,7 @@ N = tspan[1]*2**6
 tt = np.linspace(*tspan,N)
 X0 = [0.0001,0,0,0]
 
-fn += 1; fig = plt.figure(fn,figsize=[6,9])
+fn += 1; fig = plt.figure(fn,figsize=[6,6])
 spn = 220
 
 for B in [0.00, 0.06, 0.08, 0.10]:
