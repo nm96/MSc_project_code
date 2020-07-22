@@ -39,7 +39,7 @@ def Hua(X,h,k_c,alpha,mu):
     y = X[2]
     r = (x*x + y*y)**0.5
     delta = (r-h)*np.heaviside(r-h,0.5)
-    return (k_c*delta + alpha*delta**2,mu*(k_c*delta + alpha*delta**2))
+    return (k_c*delta + alpha*delta**2, -mu*(k_c*delta + alpha*delta**2))
 
 def NHSommerfeld(X,Omega,h,mu,b,R2):
     """Model function for the Naive Half-Sommerfeld lubrication model. See
