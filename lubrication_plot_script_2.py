@@ -57,7 +57,7 @@ for B in [0.00, 0.06, 0.08, 0.10]:
     ax = fig.add_subplot(spn)
     ax.axvline(Om_nat,ls='--',c='g')
     ax.axvline(Om,ls='--',c='r')
-    ax.plot(*transformed(sol),c='k')
+    ax.plot(*transformed2(sol),c='k')
     ax.set_title(r"""$\beta$ = {:.2f}""".format(B))
     ax.set_ylabel("$\log|\mathcal{F}[X]|$")
     ax.set_xlabel("$\omega \ (s^{-1})$")
