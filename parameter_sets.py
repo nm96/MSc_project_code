@@ -39,3 +39,9 @@ R2 = 100 # Radius
 beta = 12*mu*b*R2**3
 
 print("Critical Beta = {:.4f}".format(beta))
+
+# Interesting behvaiour with Om_nat > Om:
+B = 1.65
+Om = 0.3
+c = 0.1
+# (Other values from set above)
