@@ -142,7 +142,7 @@ def PSD_y(sol):
     x = sol.y[2][N0//2:] # removing first half of time series
     N = len(x)
     T = sol.t[-1]
-    w = np.hanning(N)
+    w = np.blackman(N)
     P = (2/N)*abs(fft(w*x))
     om = np.arange(N)*4*pi/T
     return (om,P)

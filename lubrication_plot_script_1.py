@@ -40,7 +40,7 @@ Om_nat = (k/m)**0.5 # Shaft natural frequency
 model = (NHSommerfeld,(Om,h,mu,b,R2))
 params = (eps,Om,m,c,k,h,model)
 
-tspan = (0,2**10)    
+tspan = (0,2**12)    
 N = tspan[1]*2**6
 tt = np.linspace(*tspan,N)
 X0 = [0.0001,0,0,0]
@@ -52,14 +52,17 @@ for B in [0.15, 0.80, 1.30, 1.35, 1.40, 1.65]:
     model = (NHSommerfeld2,(Om,h,B))
     params = (eps,Om,m,c,k,h,model)
     sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
-    # Plot spectrum:
+    # Plot spectrum - new version:
     spn += 1
     ax = fig.add_subplot(spn)
     ax.axvline(Om_nat,ls='--',c='g')
     ax.axvline(Om,ls='--',c='r')
-    ax.plot(*transformed(sol),c='k')
-    ax.set_title(r"""$\beta$ = {:.2f}""".format(B))
-    ax.set_ylabel("$\log|\mathcal{F}[X]|$")
+    om, P = PSD(sol)
+    #ax.plot(om,np.log(P),c='k')
+    ax.plot(om,P,c='k')
+    ax.set_xlim([0,5])
+    ax.set_title(r"""$\beta$ = {:.4f}""".format(B))
+    ax.set_ylabel("PSD")
     ax.set_xlabel("$\omega \ (s^{-1})$")
     ax.grid("on")
 
