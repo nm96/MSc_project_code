@@ -44,7 +44,7 @@ R2 = 100 # Radius
 #c = 0.11
 
 fn += 1; fig = plt.figure(fn,figsize=[6,6])
-spn = 310
+spn = 110
 #for B in np.linspace(1.49,1.5,4):
 for B in [1.65]:
     Om_nat = (k/m)**0.5 # Shaft natural frequency
