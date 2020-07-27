@@ -33,22 +33,23 @@ h = 1 # Gap width
 mu = 1*10**-7 # Viscosity
 b = 0.1 # Bearing length
 R2 = 100 # Radius
+B = 1.65
 
-Om_nat = (k/m)**0.5 # Shaft natural frequency
 
 # Define the model:
 model = (NHSommerfeld,(Om,h,mu,b,R2))
 params = (eps,Om,m,c,k,h,model)
 
-tspan = (0,2**16)    
+tspan = (0,2**12)    
 N = tspan[1]*2**6
 tt = np.linspace(*tspan,N)
 X0 = [0.0001,0,0,0]
 
 fn += 1; fig = plt.figure(fn,figsize=[6,6])
-spn = 220
+spn = 120
 
-for B in [1.65]:
+for k in [10,10.1]:
+    Om_nat = (k/m)**0.5 # Shaft natural frequency
     model = (NHSommerfeld2,(Om,h,B))
     params = (eps,Om,m,c,k,h,model)
     sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
@@ -58,7 +59,7 @@ for B in [1.65]:
     ax.axvline(Om_nat,ls='--',c='g')
     ax.axvline(Om,ls='--',c='r')
     ax.plot(*transformed(sol),c='k')
-    ax.set_title(r"""$\beta$ = {:.2f}""".format(B))
+    ax.set_title(r"""$\omega_n$ = {:.4f}""".format(Om_nat))
     ax.set_ylabel("$\log|\mathcal{F}[X]|$")
     ax.set_xlabel("$\omega \ (s^{-1})$")
     ax.grid("on")
