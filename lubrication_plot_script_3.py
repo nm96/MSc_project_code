@@ -40,13 +40,13 @@ b = 0.1 # Bearing length
 R2 = 100 # Radius
 
 # Special values:
-Om = 0.3
-c = 0.10
+#Om = 0.3
+#c = 0.11
 
 fn += 1; fig = plt.figure(fn,figsize=[6,6])
-spn = 110
+spn = 310
 #for B in np.linspace(1.49,1.5,4):
-for B in [1.5]:
+for B in [1.65]:
     Om_nat = (k/m)**0.5 # Shaft natural frequency
     model = (NHSommerfeld2,(Om,h,B))
     params = (eps,Om,m,c,k,h,model)
@@ -57,9 +57,35 @@ for B in [1.5]:
     ax.axvline(Om_nat,ls='--',c='g')
     ax.axvline(Om,ls='--',c='r')
     ax.plot(*transformed(sol),c='k')
+    ax.set_xlim([0,10])
     ax.set_title(r"""$\beta$ = {:.4f}""".format(B))
     ax.set_ylabel("$\log|\mathcal{F}[X]|$")
     ax.set_xlabel("$\omega \ (s^{-1})$")
+    # Plot spectrum - new version:
+    spn += 1
+    ax = fig.add_subplot(spn)
+    ax.axvline(Om_nat,ls='--',c='g')
+    ax.axvline(Om,ls='--',c='r')
+    om, P = PSD(sol)
+    ax.plot(om,np.log(P),c='k')
+    ax.set_xlim([0,10])
+    ax.set_title(r"""$\beta$ = {:.4f}""".format(B))
+    ax.set_ylabel("log(PSD)")
+    ax.set_xlabel("$\omega \ (s^{-1})$")
+    ax.grid("on")
+    # Plot spectrum - new version:
+    spn += 1
+    ax = fig.add_subplot(spn)
+    ax.axvline(Om_nat,ls='--',c='g')
+    ax.axvline(Om,ls='--',c='r')
+    om, P = PSD_y(sol)
+    ax.plot(om,np.log(P),c='k')
+    ax.set_xlim([0,10])
+    ax.set_title(r"""$\beta$ = {:.4f}""".format(B))
+    ax.set_ylabel("log(PSD)")
+    ax.set_xlabel("$\omega \ (s^{-1})$")
+    ax.grid("on")
+
     ax.grid("on")
 
 plt.tight_layout()

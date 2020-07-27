@@ -5,6 +5,7 @@ be incorporated in the Jeffcott equations are in the the 'models' module.
 
 import numpy as np
 from scipy.integrate import solve_ivp
+from scipy.fft import fft
 from scipy.fft import rfft
 import matplotlib.pyplot as plt
 
@@ -125,3 +126,27 @@ def transformed2(sol):
     fftx = rfft(solx*np.hanning(len(solx)))[:len(freq_scale)]
     ffty = rfft(soly*np.hanning(len(soly)))[:len(freq_scale)]
     return (freq_scale, np.log((np.abs(fftx)**2 + np.abs(ffty)**2)**0.5))
+
+def PSD(sol):
+    N0 = len(sol.t)
+    x = sol.y[0][N0//2:] # removing first half of time series
+    N = len(x)
+    T = sol.t[-1]
+    w = np.hanning(N)
+    P = (2/N)*abs(fft(w*x))
+    om = np.arange(N)*4*pi/T
+    return (om,P)
+
+def PSD_y(sol):
+    N0 = len(sol.t)
+    x = sol.y[2][N0//2:] # removing first half of time series
+    N = len(x)
+    T = sol.t[-1]
+    w = np.hanning(N)
+    P = (2/N)*abs(fft(w*x))
+    om = np.arange(N)*4*pi/T
+    return (om,P)
+
+    
+    
+
