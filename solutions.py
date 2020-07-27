@@ -128,25 +128,16 @@ def transformed2(sol):
     return (freq_scale, np.log((np.abs(fftx)**2 + np.abs(ffty)**2)**0.5))
 
 def PSD(sol):
+    """New power spectrum density function. Essentially equivalent to the old
+    transform functions above but using only one component (x(t)) of the
+    solution and applying a Hanning window before taking the Fourier
+    transform.
+    """
     N0 = len(sol.t)
-    x = sol.y[0][N0//2:] # removing first half of time series
+    x = sol.y[0][N0//2:]
     N = len(x)
     T = sol.t[-1]
     w = np.hanning(N)
     P = (2/N)*abs(fft(w*x))
     om = np.arange(N)*4*pi/T
     return (om,P)
-
-def PSD_y(sol):
-    N0 = len(sol.t)
-    x = sol.y[2][N0//2:] # removing first half of time series
-    N = len(x)
-    T = sol.t[-1]
-    w = np.blackman(N)
-    P = (2/N)*abs(fft(w*x))
-    om = np.arange(N)*4*pi/T
-    return (om,P)
-
-    
-    
-

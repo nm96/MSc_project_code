@@ -51,16 +51,6 @@ for B in [1.65]:
     model = (NHSommerfeld2,(Om,h,B))
     params = (eps,Om,m,c,k,h,model)
     sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
-    # Plot spectrum:
-    spn += 1
-    ax = fig.add_subplot(spn)
-    ax.axvline(Om_nat,ls='--',c='g')
-    ax.axvline(Om,ls='--',c='r')
-    ax.plot(*transformed(sol),c='k')
-    ax.set_xlim([0,10])
-    ax.set_title(r"""$\beta$ = {:.4f}""".format(B))
-    ax.set_ylabel("$\log|\mathcal{F}[X]|$")
-    ax.set_xlabel("$\omega \ (s^{-1})$")
     # Plot spectrum - new version:
     spn += 1
     ax = fig.add_subplot(spn)
@@ -72,20 +62,6 @@ for B in [1.65]:
     ax.set_title(r"""$\beta$ = {:.4f}""".format(B))
     ax.set_ylabel("log(PSD)")
     ax.set_xlabel("$\omega \ (s^{-1})$")
-    ax.grid("on")
-    # Plot spectrum - new version:
-    spn += 1
-    ax = fig.add_subplot(spn)
-    ax.axvline(Om_nat,ls='--',c='g')
-    ax.axvline(Om,ls='--',c='r')
-    om, P = PSD_y(sol)
-    ax.plot(om,np.log(P),c='k')
-    ax.set_xlim([0,10])
-    ax.set_title(r"""$\beta$ = {:.4f}""".format(B))
-    ax.set_ylabel("log(PSD)")
-    ax.set_xlabel("$\omega \ (s^{-1})$")
-    ax.grid("on")
-
     ax.grid("on")
 
 plt.tight_layout()
