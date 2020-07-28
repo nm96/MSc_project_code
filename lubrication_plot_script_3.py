@@ -40,13 +40,13 @@ b = 0.1 # Bearing length
 R2 = 100 # Radius
 
 # Special values:
-#Om = 0.3
 #c = 0.11
+Om = 3.5
 
 fn += 1; fig = plt.figure(fn,figsize=[6,6])
 spn = 110
 #for B in np.linspace(1.49,1.5,4):
-for B in [1.65]:
+for B in [1.35]:
     Om_nat = (k/m)**0.5 # Shaft natural frequency
     model = (NHSommerfeld2,(Om,h,B))
     params = (eps,Om,m,c,k,model)
@@ -58,9 +58,8 @@ for B in [1.65]:
     ax.axvline(Om,ls='--',c='r')
     om, P = PSD(sol)
     ax.plot(om,np.log(P),c='k')
-    P2 = PSD_nw(sol)[1]
-    ax.plot(om,np.log(P2),c='b')
     ax.set_xlim([0,10])
+    #ax.set_ylim([-10,10])
     ax.set_title(r"""$\beta$ = {:.4f}""".format(B))
     ax.set_ylabel("log(PSD)")
     ax.set_xlabel("$\omega \ (s^{-1})$")
