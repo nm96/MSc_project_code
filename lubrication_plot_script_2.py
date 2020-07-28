@@ -53,15 +53,29 @@ for B in [0.00, 0.06, 0.08, 0.10]:
     params = (eps,Om,m,c,k,h,model)
     sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
     # Plot spectrum:
+   # spn += 1
+   # ax = fig.add_subplot(spn)
+   # ax.axvline(Om_nat,ls='--',c='g')
+   # ax.axvline(Om,ls='--',c='r')
+   # ax.plot(*transformed2(sol),c='k')
+   # ax.set_title(r"""$\beta$ = {:.2f}""".format(B))
+   # ax.set_ylabel("$\log|\mathcal{F}[X]|$")
+   # ax.set_xlabel("$\omega \ (s^{-1})$")
+   # ax.grid("on")    
+    # Plot spectrum - new version:
     spn += 1
     ax = fig.add_subplot(spn)
     ax.axvline(Om_nat,ls='--',c='g')
     ax.axvline(Om,ls='--',c='r')
-    ax.plot(*transformed2(sol),c='k')
-    ax.set_title(r"""$\beta$ = {:.2f}""".format(B))
-    ax.set_ylabel("$\log|\mathcal{F}[X]|$")
-    ax.set_xlabel("$\omega \ (s^{-1})$")
+    om, P = PSD(sol)
+    ax.plot(om,np.log(P),c='k')
+    ax.set_xlim([0,5])
+    ax.set_title(r"""$\beta$ = {:.4f}""".format(B))
+    ax.set_ylabel("$\log(P(\omega))$")
+    ax.set_xlabel("$\omega$")
     ax.grid("on")
+
+
 
 plt.tight_layout()
 fig.savefig("../report/results1_fig1.eps")

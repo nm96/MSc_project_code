@@ -141,3 +141,18 @@ def PSD(sol):
     P = (2/N)*abs(fft(w*x))
     om = np.arange(N)*4*pi/T
     return (om,P)
+
+def PSD_nw(sol):
+    """New power spectrum density function. Essentially equivalent to the old
+    transform functions above but using only one component (x(t)) of the
+    solution and applying a Hanning window before taking the Fourier
+    transform.
+    (NO WINDOW)
+    """
+    N0 = len(sol.t)
+    x = sol.y[0][N0//2:]
+    N = len(x)
+    T = sol.t[-1]
+    P = (2/N)*abs(fft(x))
+    om = np.arange(N)*4*pi/T
+    return (om,P)

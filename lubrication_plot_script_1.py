@@ -40,7 +40,7 @@ Om_nat = (k/m)**0.5 # Shaft natural frequency
 model = (NHSommerfeld,(Om,h,mu,b,R2))
 params = (eps,Om,m,c,k,h,model)
 
-tspan = (0,2**12)    
+tspan = (0,2**14)    
 N = tspan[1]*2**6
 tt = np.linspace(*tspan,N)
 X0 = [0.0001,0,0,0]
