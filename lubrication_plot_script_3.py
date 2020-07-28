@@ -49,7 +49,7 @@ spn = 110
 for B in [1.65]:
     Om_nat = (k/m)**0.5 # Shaft natural frequency
     model = (NHSommerfeld2,(Om,h,B))
-    params = (eps,Om,m,c,k,h,model)
+    params = (eps,Om,m,c,k,model)
     sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
     # Plot spectrum - new version:
     spn += 1

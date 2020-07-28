@@ -35,7 +35,7 @@ Om_nat = (k/m)**0.5 # Shaft natural frequency
 
 # Define the model:
 model = (NHSommerfeld,(Om,h,mu,b,R2))
-params = (eps,Om,m,c,k,h,model)
+params = (eps,Om,m,c,k,model)
 
 tspan = (0,2**10)    
 N = tspan[1]*2**6
@@ -46,14 +46,14 @@ sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
 
 # Plot solution in stationary frame:
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
-ax.plot(*solxy2(sol))
+ax.plot(*solxy(sol))
 ax.plot(h*cos(np.linspace(0,2*pi,1000)),h*sin(np.linspace(0,2*pi,1000)),c='r') 
 ax.set_aspect('equal')
 ax.set_title("Solution trajectory in the stationary frame")
 
 # Plot solution in corotating frame:
 fn += 1; fig = plt.figure(fn); ax = fig.add_axes([.1,.1,.8,.8])
-ax.plot(*rotsolxy2(sol,Om))
+ax.plot(*rotsolxy(sol,Om))
 ax.plot(h*cos(np.linspace(0,2*pi,1000)),h*sin(np.linspace(0,2*pi,1000)),c='r') 
 ax.set_aspect('equal')
 ax.set_title("Solution trajectory in the co-rotating frame")

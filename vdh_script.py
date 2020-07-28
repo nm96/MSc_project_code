@@ -34,7 +34,7 @@ Om_nat_c = (k_c/m)**0.5 # 'In-contact' natural frequency
 
 # Define the model:
 model = (VdH,(h,k_c))
-params = (eps,Om,m,c,k,h,model)
+params = (eps,Om,m,c,k,model)
     
 # Integrate
 tspan = (0,2**9)    

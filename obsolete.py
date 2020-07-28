@@ -1,3 +1,5 @@
+# Old rarely used functions - stashing them here rather than using git
+# properly!
 
 def dXdt_old(t,X,eps,Omega,m,c,k,h,model):
     """Right hand side of the Jeffcott equations in first order form, to be

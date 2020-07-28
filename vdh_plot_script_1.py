@@ -46,7 +46,7 @@ X0 = [0.01,0,0,0]
 
 for eps in [0.12, 0.2, 0.30, 0.35, 0.38]:
     print(eps)
-    params = (eps,Om,m,c,k,h,model)
+    params = (eps,Om,m,c,k,model)
     sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
     # Plot spectrum:
     fn += 1; fig = plt.figure(fn)

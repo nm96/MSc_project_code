@@ -46,7 +46,7 @@ Om_nat_c = (k_c/m)**0.5 # 'In-contact' natural frequency
 
 # Define the model:
 model = (simple,(0,)) 
-params = (eps,Om,m,c,k,h,model) # Package parameters into a tuple
+params = (eps,Om,m,c,k,model) # Package parameters into a tuple
     
 # Set conditions and time span, integrate
 
@@ -87,7 +87,7 @@ ax.grid("on")
 
 # Define the model:
 model = (VdH,(h,k_c))
-params = (eps,Om,m,c,k,h,model)
+params = (eps,Om,m,c,k,model)
     
 sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
 

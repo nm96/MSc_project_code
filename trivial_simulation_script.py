@@ -27,7 +27,7 @@ Om_nat = (k/m)**0.5 # Shaft natural frequency
 
 model = (simple,(0,)) 
 
-params = (eps,Om,m,c,k,h,model) # Package parameters into a tuple
+params = (eps,Om,m,c,k,model) # Package parameters into a tuple
     
 # Integrate the ODE system over a given time span with given initial
 # conditions:
