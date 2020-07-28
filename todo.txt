@@ -6,12 +6,16 @@ Short term
 
 - More general tidying up of code - remove obsolete/incorrect functions
 
+- Write code which saves solution data to files so that it can be processed
+  in different ways
+
 - Produce spectral plots across a range of parameters to illustrate
   interesting phenomena in Lubrication and VdH models.
 
 - Extend these 'ranges of plots' to full brute-force bifurcations which
   produce heatmaps / waterfalls plots. Will require extremely long
   (overnight?) computations.
+
 
 Long term
 ---------
