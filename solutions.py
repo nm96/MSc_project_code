@@ -138,7 +138,7 @@ def PSD(sol):
     N = len(x)
     T = sol.t[-1]
     w = np.hanning(N)
-    P = (2/N)*abs(fft(w*x))
+    P = (2/N)*abs(fft(w*x))**2
     om = np.arange(N)*4*pi/T
     return (om,P)
 
@@ -153,6 +153,6 @@ def PSD_nw(sol):
     x = sol.y[0][N0//2:]
     N = len(x)
     T = sol.t[-1]
-    P = (2/N)*abs(fft(x))
+    P = (2/N)*abs(fft(x))**2
     om = np.arange(N)*4*pi/T
     return (om,P)
