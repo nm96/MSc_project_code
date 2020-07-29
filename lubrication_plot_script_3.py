@@ -42,7 +42,7 @@ R2 = 100 # Radius
 
 # Special values:
 #c = 0.11
-Om = 4.7
+Om = 4.1
 
 fn += 1; fig = plt.figure(fn,figsize=[12,6])
 spn = 110
