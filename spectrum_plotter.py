@@ -11,18 +11,6 @@ if sys.platform == 'linux':
 
 fn = 0  # Initialize figure number for plotting
 
-# Rename basic functions and constants for clarity
-cos = np.cos
-sin = np.sin
-tanh = np.tanh
-pi = np.pi
-
-# Integration limits
-tspan = (0,2**14)  
-N = tspan[1]*2**6
-tt = np.linspace(*tspan,N)
-X0 = [0.01,0,0,0]
-
 # Standard parameter values:
 eps = 0.2 # Rotor eccentricity
 Om = 4.1 # Driving frequency
@@ -39,9 +27,9 @@ R2 = 100 # Radius
 Om = 4.1
 
 fn += 1; fig = plt.figure(fn,figsize=[12,6])
-spn = 110
+spn = 320
 #for B in np.linspace(1.49,1.5,4):
-for B in [1.65]:
+for B in [0.15, 0.80, 1.30, 1.35, 1.40, 1.65]:
     Om_nat = (k/m)**0.5 # Shaft natural frequency
     # Plot spectrum, label:
     spn += 1
@@ -66,7 +54,8 @@ for B in [1.65]:
 plt.tight_layout()
 
 #fig.savefig("../plots/windowing_effects.eps")
-fig.savefig("../plots/beta_{:.2f}_spectrum.eps".format(B))
+#fig.savefig("../plots/beta_{:.2f}_spectrum.eps".format(B))
+fig.savefig("../plots/multiple_spectra.eps".format(B))
 
 plt.show()
 

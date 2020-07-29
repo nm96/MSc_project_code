@@ -1,1 +1,6 @@
 beta_1.65_spectrum.csv filter=lfs diff=lfs merge=lfs -text
+beta_0.15_spectrum.csv filter=lfs diff=lfs merge=lfs -text
+beta_0.80_spectrum.csv filter=lfs diff=lfs merge=lfs -text
+beta_1.30_spectrum.csv filter=lfs diff=lfs merge=lfs -text
+beta_1.35_spectrum.csv filter=lfs diff=lfs merge=lfs -text
+beta_1.40_spectrum.csv filter=lfs diff=lfs merge=lfs -text
