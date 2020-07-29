@@ -2,6 +2,7 @@ import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.fft import rfft
 import matplotlib.pyplot as plt
+import matplotlib.ticker
 import time
 from solutions import *
 from models import *
@@ -23,7 +24,7 @@ tanh = np.tanh
 pi = np.pi
 
 # Integration limits
-tspan = (0,2**12)    
+tspan = (0,2**14)    
 N = tspan[1]*2**6
 tt = np.linspace(*tspan,N)
 X0 = [0.01,0,0,0]
@@ -41,41 +42,41 @@ R2 = 100 # Radius
 
 # Special values:
 #c = 0.11
-Om = 3.5
+Om = 3*2**0.5
 
-fn += 1; fig = plt.figure(fn,figsize=[6,6])
+fn += 1; fig = plt.figure(fn,figsize=[12,7])
 spn = 110
 #for B in np.linspace(1.49,1.5,4):
-for B in [1.35]:
+for B in [0.5]:
     Om_nat = (k/m)**0.5 # Shaft natural frequency
     model = (NHSommerfeld2,(Om,h,B))
     params = (eps,Om,m,c,k,model)
     sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
-    # Plot spectrum - new version:
+    # Plot spectrum, label:
     spn += 1
     ax = fig.add_subplot(spn)
-    ax.axvline(Om_nat,ls='--',c='g')
-    ax.axvline(Om,ls='--',c='r')
-    om, P = PSD(sol)
-    ax.plot(om,np.log(P),c='k')
     ax.set_xlim([0,10])
-    #ax.set_ylim([-10,10])
-    ax.set_title(r"""$\beta$ = {:.4f}""".format(B))
-    ax.set_ylabel("log(PSD)")
+    ax.axvline(Om_nat,ls='--',c='g',label=r"$\omega_{nat}$")
+    ax.axvline(Om,ls='--',c='r',label=r"$\Omega$")
+    om, P = PSD_nw(sol)
+    ax.semilogy(om,P,c='gray',label=r"Spectrum without windowing")
+    om, P = PSD(sol)
+    ax.semilogy(om,P,c='k',label=r"Spectrum with Hanning window applied")
+    locmaj = matplotlib.ticker.LogLocator(base=100,numticks=20) 
+    ax.yaxis.set_major_locator(locmaj)
+    locmin = matplotlib.ticker.LogLocator(base=100,subs=(0.2,0.4,0.6,0.8),numticks=50)
+    ax.yaxis.set_minor_locator(locmin)
+    ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
+    ax.grid()
+    ax.set_title(r"""Effect of Windowing ($\beta = {:.2f}$)""".format(B))
+    ax.set_ylabel("$P(\omega)$",rotation=0)
+    ax.yaxis.labelpad = 20
     ax.set_xlabel("$\omega \ (s^{-1})$")
-    ax.grid("on")
-    # Plot spectrum (old):
-    #spn += 1
-    #ax = fig.add_subplot(spn)
-    #ax.axvline(Om_nat,ls='--',c='g')
-    #ax.axvline(Om,ls='--',c='r')
-    #ax.plot(*transformed(sol),c='k')
-    #ax.set_title(r"""$\beta$ = {:.2f}""".format(B))
-    #ax.set_ylabel("$\log|\mathcal{F}[X]|$")
-    #ax.set_xlabel("$\omega \ (s^{-1})$")
-    #ax.grid("on")    
+    ax.legend()
 
 plt.tight_layout()
+
+#fig.savefig("../plots/windowing_effects.eps")
 
 tf = time.time()
 print("T = {:.2f}s".format(tf-t0))
