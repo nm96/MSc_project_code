@@ -3,7 +3,7 @@ import solutions as sln
 import pickle
 import sys
 
-inpf = sys.argv[1]
+inpf = sys.argv[1] # i.e. "sol_data.pkl"
 
 with open(inpf, 'rb') as f:
     params, sol = pickle.load(f)
@@ -23,6 +23,7 @@ with open("spec_data.pkl", 'wb') as f:
 B = params[-1][-1][-1]
 Om = params[1]
 c = params[3]
+T = sol.t[-1]
 
-with open("../data/B{:.2f}_Om{:.2f}_c{:.2f}_spec_data.pkl".format(B,Om,c), 'wb') as f:
+with open("../data/B{:.2f}_Om{:.2f}_c{:.2f}_T{:.0e}_spec_data.pkl".format(B,Om,c,T), 'wb') as f:
     pickle.dump(spec_data,f,pickle.HIGHEST_PROTOCOL)

@@ -1,0 +1,7 @@
+#!/bin/bash
+# Script for solving, transforming and plotting PSD in one step, using the
+# default data file names.
+
+python3 Solver.py
+python3 Transformer.py sol_data.pkl
+python3 PSD_Plotter.py spec_dat.pkl
