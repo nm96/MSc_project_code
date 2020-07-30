@@ -1,7 +1,7 @@
 import numpy as np
-from scipy.integrate import solve_ivp
-from solutions import *
-from models import *
+import scipy.integrate as spi
+import solutions as sln
+import models as mdl
 import pickle
 
 import time; t0 = time.time()
@@ -14,19 +14,19 @@ X0 = [0.01,0,0,0]
 
 # Parameter values and model:
 eps = 0.2 # Rotor eccentricity
-Om = 4.1 # Driving frequency
-m = 10 # Mass (per unit length)
-c = 1.5 # Damping coefficient
 k = 10 # Stiffness coefficient
+m = 10 # Mass (per unit length)
 h = 1 # Gap width
 
-B = 1.65
+Om = 4.1
+c = 1.5
+B = 1.5
 
-model = (NHSommerfeld2,(Om,h,B))
+model = (mdl.NHSommerfeld2,(Om,h,B))
 params = (eps,Om,m,c,k,model)
 
 # Solve:
-sol = solve_ivp(dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
+sol = spi.solve_ivp(sln.dXdt,tspan,X0,t_eval=tt,args=params,method='Radau')
 
 # Write parameter-solution tuple to a binary file:
 sol_data = (params, sol)

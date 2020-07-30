@@ -14,10 +14,15 @@ if sys.platform == 'linux':
 with open("spec_data.pkl",'rb') as f:
     params, om, P = pickle.load(f)
 
+# Note:
+# model = (mdl.NHSommerfeld2,(Om,h,B))
+# params = (eps,Om,m,c,k,model)
+
 om_max = om[-1]
 Om = params[1]
 om_nat = (params[4]/params[2])**0.5
 B = params[-1][-1][-1]
+c = params[3]
 
 fn = 0  # Initialize figure number for plotting
 fn += 1; fig = plt.figure(fn,figsize=[12,6])
@@ -34,7 +39,7 @@ locmin = matplotlib.ticker.LogLocator(base=100,subs=(0.2,0.4,0.6,0.8),numticks=5
 ax.yaxis.set_minor_locator(locmin)
 ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
 ax.grid()
-ax.set_title(r"""$\beta = {:.2f}$, $\Omega = {:.2f}$""".format(B,Om))
+ax.set_title(r"""$\Omega = {:.2f}$, $c = {:.2f}$, $\beta = {:.2f}$""".format(Om,c,B))
 ax.set_ylabel("$P(\omega)$",rotation=0)
 ax.yaxis.labelpad = 20
 ax.set_xlabel("$\omega$")
