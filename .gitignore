@@ -1,12 +1,2 @@
-*.pdf
-*.png
-*.bmp
-*.aux
-*.fls
-*.log
-*.fdb_latexmk
-*.bbl
-*.blg
-*.out
-*.toc
+*.pkl
 __pycache__
