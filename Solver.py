@@ -20,8 +20,8 @@ m = 10 # Mass (per unit length)
 h = 1 # Gap width
 
 Om = 4.1
-c = 0.5
-B = 0.5
+c = 1.5
+B = 1.5
 
 model = (mdl.NHSommerfeld2,(Om,h,B))
 params = (eps,Om,m,c,k,model)
@@ -35,8 +35,9 @@ with open("sol_data.pkl", 'wb') as f:
     pickle.dump(sol_data,f,pickle.HIGHEST_PROTOCOL)
 
 # Save a copy of the file in an external data directory:
-#with open("../data/B{:.2f}_Om{:.2f}_c{:.2f}_T{:.2f}_sol_data.pkl".format(B,Om,c,T), 'wb') as f:
-#    pickle.dump(sol_data,f,pickle.HIGHEST_PROTOCOL)
+fname = "../data/raw/B{:.2f}_Om{:.2f}_c{:.2f}_T{:.0e}_sol_data.pkl".format(B,Om,c,T)
+with open(fname, 'wb') as f:
+    pickle.dump(sol_data,f,pickle.HIGHEST_PROTOCOL)
 
 
 tf = time.time()
