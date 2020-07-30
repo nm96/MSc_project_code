@@ -1,13 +1,16 @@
 import numpy as np
-import solutions as slns
+import solutions as sln
 import pickle
+import sys
+
+inpf = sys.argv[1]
+
+with open(inpf, 'rb') as f:
+    params, sol = pickle.load(f)
 
 om_max = 10 # Maximum frequency to include in the spectral data
 
-with open("sol_data.pkl", 'rb') as f:
-    params, sol = pickle.load(f)
-
-om, P = slns.PSD(sol)
+om, P = sln.PSD(sol)
 
 P = P[om < om_max]
 om = om[om < om_max]
@@ -15,4 +18,11 @@ om = om[om < om_max]
 spec_data = (params, om, P)
 
 with open("spec_data.pkl", 'wb') as f:
+    pickle.dump(spec_data,f,pickle.HIGHEST_PROTOCOL)
+    
+B = params[-1][-1][-1]
+Om = params[1]
+c = params[3]
+
+with open("../data/B{:.2f}_Om{:.2f}_c{:.2f}_spec_data.pkl".format(B,Om,c), 'wb') as f:
     pickle.dump(spec_data,f,pickle.HIGHEST_PROTOCOL)
