@@ -24,7 +24,7 @@ tanh = np.tanh
 pi = np.pi
 
 # Integration limits
-tspan = (0,2**14)  
+tspan = (0,2**10)  
 N = tspan[1]*2**6
 tt = np.linspace(*tspan,N)
 X0 = [0.01,0,0,0]
@@ -42,12 +42,11 @@ R2 = 100 # Radius
 
 # Special values:
 #c = 0.11
-Om = 4.1
 
 fn += 1; fig = plt.figure(fn,figsize=[12,6])
 spn = 110
 #for B in np.linspace(1.49,1.5,4):
-for B in [1.65]:
+for B in [1.5]:
     Om_nat = (k/m)**0.5 # Shaft natural frequency
     model = (NHSommerfeld2,(Om,h,B))
     params = (eps,Om,m,c,k,model)
@@ -75,7 +74,8 @@ for B in [1.65]:
 plt.tight_layout()
 
 #fig.savefig("../plots/windowing_effects.eps")
-fig.savefig("../plots/beta_{:.2f}_spectrum.eps".format(B))
+#fig.savefig("../plots/beta_{:.2f}_spectrum.eps".format(B))
+
 
 tf = time.time()
 print("T = {:.2f}s".format(tf-t0))
