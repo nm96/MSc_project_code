@@ -4,4 +4,4 @@
 
 python3 Solver.py
 python3 Transformer.py sol_data.pkl
-python3 PSD_Plotter.py spec_dat.pkl
+python3 PSD_Plotter.py spec_data.pkl

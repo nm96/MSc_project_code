@@ -21,7 +21,7 @@ h = 1 # Gap width
 
 Om = 4.1
 c = 1.5
-B = 1.5
+B = 2.7
 
 model = (mdl.NHSommerfeld2,(Om,h,B))
 params = (eps,Om,m,c,k,model)

@@ -10,8 +10,10 @@ if sys.platform == 'linux':
     rc('font',**{'family':'serif','serif':['Computer Modern Roman']})
     rc('text', usetex=True)
 
-# Import the spectrum data
-with open("spec_data.pkl",'rb') as f:
+
+inpf = sys.argv[1] # i.e. "spec_data.pkl"
+
+with open(inpf, 'rb') as f:
     params, om, P = pickle.load(f)
 
 # Note:
@@ -47,10 +49,7 @@ ax.legend()
 
 plt.tight_layout()
 
-#fig.savefig("../plots/windowing_effects.eps")
-#fig.savefig("../plots/beta_{:.2f}_spectrum.eps".format(B))
-#fig.savefig("../plots/multiple_spectra.eps".format(B))
-#fig.savefig("../plots/Omega_less_than_om_nat.eps".format(B))
+#fig.savefig("../plots/sparse_peak_spectrum.eps".format(B))
 
 plt.show()
 

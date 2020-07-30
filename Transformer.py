@@ -25,6 +25,6 @@ Om = params[1]
 c = params[3]
 T = sol.t[-1]
 
-fname = "../data/B{:.2f}_Om{:.2f}_c{:.2f}_T{:.0e}_spec_data.pkl".format(B,Om,c,T)
+fname = "../data/B{:.2f}_Om{:.2f}_c{:.2f}_T{:.0e}_specl_data.pkl".format(B,Om,c,T)
 with open(fname, 'wb') as f:
     pickle.dump(spec_data,f,pickle.HIGHEST_PROTOCOL)
