@@ -10,9 +10,10 @@ if sys.platform == 'linux':
     rc('font',**{'family':'serif','serif':['Computer Modern Roman']})
     rc('text', usetex=True)
 
-
+# Get input file from commmand line
 inpf = sys.argv[1] # i.e. "spec_data.pkl"
 
+# Read input file
 with open(inpf, 'rb') as f:
     params, om, P = pickle.load(f)
 
@@ -20,6 +21,7 @@ with open(inpf, 'rb') as f:
 # model = (mdl.NHSommerfeld2,(Om,h,B))
 # params = (eps,Om,m,c,k,model)
 
+# Get parameters to label the plot with
 om_max = om[-1]
 Om = params[1]
 om_nat = (params[4]/params[2])**0.5
