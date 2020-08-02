@@ -20,7 +20,7 @@ m = 10 # Mass (per unit length)
 h = 1 # Gap width
 
 Om = 4.1
-c = 1.5
+c = 1.0
 B = 2.7
 
 model = (mdl.NHSommerfeld2,(Om,h,B))
