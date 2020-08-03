@@ -1,13 +1,5 @@
 Short term
 ----------
-- More general tidying up of code - remove obsolete/incorrect functions
-
-- Work out how much computation times is spent on finding solutions v.
-  calculating fft - possibly alter tolerances as a result of this.
-
-- Write code which saves solution data to files so that it can be processed
-  in different ways
-
 - Produce spectral plots across a range of parameters to illustrate
   interesting phenomena in Lubrication and VdH models.
 
@@ -15,6 +7,9 @@ Short term
   produce heatmaps / waterfalls plots. Will require extremely long
   (overnight?) computations.
 
+- Rewrite code using a general 'simulation' class to allow much easier
+  processing of solutions (parameters will be saved as attributes of
+  simulation objects)
 
 Long term
 ---------
