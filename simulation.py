@@ -124,10 +124,15 @@ class Simulation:
         ax.legend()
         plt.tight_layout()
 
+    def phase_plot(self):
+        pass
+
             
 # Quick test
                 
 s1 = Simulation()
+
+s1.B = 1.65
 
 s1.solve()
 
