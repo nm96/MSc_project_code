@@ -16,7 +16,7 @@ if sys.platform == 'linux':
 class Simulation:
 
 
-    # Default set of physical parameters:
+    # Default physical parameters:
     eps = 0.2 
     k = 10
     m = 10
@@ -29,11 +29,8 @@ class Simulation:
     X0 = [0.01,0,0,0]
     T = 2**14
     N = T*2**4
-
-    om_max = 10
-    om_nat = 1
-
-    
+    rtol = 1e-4
+    atol = 1e-8
     
     def model(self,X):
         """Model function for the Naive Half-Sommerfeld lubrication model. See
@@ -81,7 +78,7 @@ class Simulation:
         N = self.N
         tspan = (0,T)
         sol = spi.solve_ivp(self.dXdt,tspan,X0,t_eval=np.linspace(0,T,N),
-                method='Radau')
+                rtol=self.rtol,atol=self.atol,method='Radau')
         self.t = sol.t
         self.X = sol.y
         tf = time.time()
@@ -103,10 +100,11 @@ class Simulation:
         tf = time.time()
         print("Transform time = {:.2f}s".format(tf-t0))
 
-    def psd_plot(self,fn=1):
+    def psd_plot(self,fn=1,om_max=10):
         fig, ax = plt.subplots(num=fn)
-        ax.set_xlim([0,self.om_max])
-        ax.axvline(self.om_nat,ls='--',c='g',label=r"$\omega_{nat}$")
+        ax.set_xlim([0,om_max])
+        om_nat = (self.k/self.m)**0.5
+        ax.axvline(om_nat,ls='--',c='g',label=r"$\omega_{nat}$")
         ax.axvline(self.Om,ls='--',c='r',label=r"$\Omega$")
         ax.semilogy(self.om,self.P,c='k')
         locmaj = matplotlib.ticker.LogLocator(base=100,numticks=30) 
