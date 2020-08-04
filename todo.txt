@@ -1,15 +1,14 @@
 Short term
 ----------
+- Write short scripts which use the new simulation class to replicate and save
+  earlier results
+
 - Produce spectral plots across a range of parameters to illustrate
   interesting phenomena in Lubrication and VdH models.
 
 - Extend these 'ranges of plots' to full brute-force bifurcations which
   produce heatmaps / waterfalls plots. Will require extremely long
   (overnight?) computations.
-
-- Rewrite code using a general 'simulation' class to allow much easier
-  processing of solutions (parameters will be saved as attributes of
-  simulation objects)
 
 Long term
 ---------
