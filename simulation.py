@@ -46,18 +46,17 @@ class Simulation:
         a = r/self.h
         da = dr/self.h
         dpsi = (x*dy - y*dx)/r**2
-        fn = (-(self.B/self.h**2)*(a**2*(self.Om-2*dpsi)/((2+a**2)*(1-a**2)) +
-            da*(1-a**2)**(-1.5)*(np.pi/2 - 8/(2+a**2))))
-        ft = ((self.B/self.h**2)*(np.pi*a*(self.Om-2*dpsi)/(2*(2+a**2)*(1-a**2)**0.5) +
-            2*a*da/((2+a**2)*(1-a**2))))
+        fn = (-(self.B/self.h**2)*(a**2*(self.Om-2*dpsi)/
+            ((2+a**2)*(1-a**2))+ da*(1-a**2)**(-1.5)*(np.pi/2 - 8/(2+a**2)))) 
+        ft = ((self.B/self.h**2)*(np.pi*a*(self.Om-2*dpsi)/
+            (2*(2+a**2)*(1-a**2)**0.5) + 2*a*da/((2+a**2)*(1-a**2))))
         return (fn,ft)
 
     def dXdt(self,t,X):
         """Right hand side of the Jeffcott equations in first order form, to be
-        passed to the numerical integrator 'solve_ivp'.
-        NEW VERSION: The Jeffcott equations should describe the motion of the
-        rotor's geometric center rather than its center of mass.
-        """
+        passed to the numerical integrator 'solve_ivp'.  NEW VERSION: The
+        Jeffcott equations should describe the motion of the rotor's geometric
+        center rather than its center of mass.  """
         # Unpack the components of X:
         x,dx,y,dy = X
         # Define r = distance from stator centre to rotor centre:
@@ -81,16 +80,17 @@ class Simulation:
         T = self.T
         N = self.N
         tspan = (0,T)
-        sol = spi.solve_ivp(self.dXdt,tspan,X0,t_eval=np.linspace(0,T,N),method='Radau')
+        sol = spi.solve_ivp(self.dXdt,tspan,X0,t_eval=np.linspace(0,T,N),
+                method='Radau')
         self.t = sol.t
         self.X = sol.y
         tf = time.time()
         print("Solution time = {:.2f}s".format(tf-t0))
 
     def transform(self):
-        """New power spectrum density function. Essentially equivalent to the old
-        transform functions above but using only one component (x(t)) of the
-        solution and applying a Hanning window before taking the Fourier
+        """New power spectrum density function. Essentially equivalent to the
+        old transform functions above but using only one component (x(t)) of
+        the solution and applying a Hanning window before taking the Fourier
         transform.
         """
         t0 = time.time()
@@ -111,11 +111,13 @@ class Simulation:
         ax.semilogy(self.om,self.P,c='k')
         locmaj = matplotlib.ticker.LogLocator(base=100,numticks=30) 
         ax.yaxis.set_major_locator(locmaj)
-        locmin = matplotlib.ticker.LogLocator(base=100,subs=(0.2,0.4,0.6,0.8),numticks=50)
+        locmin = matplotlib.ticker.LogLocator(base=100,subs=(0.2,0.4,0.6,0.8),
+                numticks=50)
         ax.yaxis.set_minor_locator(locmin)
         ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
         ax.grid()
-        ts = r"""$\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$""".format(self.B,self.Om,self.c)
+        ts = r"$\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$"
+        ts = ts.format(self.B,self.Om,self.c)
         ax.set_title(ts)
         ax.set_ylabel("$P(\omega)$",rotation=0)
         ax.yaxis.labelpad = 20
@@ -133,7 +135,8 @@ class Simulation:
         fig, ax = plt.subplots()
         ax.plot(*arr)
         ax.set_aspect('equal')
-        ts = r"""$\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$""".format(self.B,self.Om,self.c)
+        ts = r"$\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$"
+        ts = ts.format(self.B,self.Om,self.c)
         ax.set_title(ts)
 
             
