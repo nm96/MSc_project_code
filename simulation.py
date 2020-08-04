@@ -103,8 +103,8 @@ class Simulation:
         tf = time.time()
         print("Transform time = {:.2f}s".format(tf-t0))
 
-    def psd_plot(self):
-        fig, ax = plt.subplots()
+    def psd_plot(self,fn=1):
+        fig, ax = plt.subplots(num=fn)
         ax.set_xlim([0,self.om_max])
         ax.axvline(self.om_nat,ls='--',c='g',label=r"$\omega_{nat}$")
         ax.axvline(self.Om,ls='--',c='r',label=r"$\Omega$")
@@ -125,35 +125,16 @@ class Simulation:
         ax.legend()
         plt.tight_layout()
 
-    def phase_plot(self):
+    def phase_plot(self,fn=1):
         N1 = self.N//2
         x = self.X[0,N1:]
         y = self.X[2,N1:]
         tt = self.t[N1:]
         arr = np.array([np.cos(self.Om*tt)*x + np.sin(self.Om*tt)*y,
         - np.sin(self.Om*tt)*x + np.cos(self.Om*tt)*y])
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(num=fn)
         ax.plot(*arr)
         ax.set_aspect('equal')
         ts = r"$\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$"
         ts = ts.format(self.B,self.Om,self.c)
         ax.set_title(ts)
-
-            
-# Quick test
-                
-s1 = Simulation()
-
-s1.B = 1.65
-s1.T = 2**10
-
-s1.solve()
-
-s1.transform()
-
-s1.phase_plot()
-
-plt.show()
-
-
-       
