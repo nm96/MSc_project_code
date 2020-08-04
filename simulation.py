@@ -34,8 +34,7 @@ class Simulation:
     
     def model(self,X):
         """Model function for the Naive Half-Sommerfeld lubrication model. See
-        preliminary report 3.4.3 for details. Takes global parameters Om and h
-        along with model-specific parameter B
+        preliminary report 3.4.3 for details.
         """
         x,dx,y,dy = X
         r = (x*x + y*y)**0.5
@@ -51,9 +50,8 @@ class Simulation:
 
     def dXdt(self,t,X):
         """Right hand side of the Jeffcott equations in first order form, to be
-        passed to the numerical integrator 'solve_ivp'.  NEW VERSION: The
-        Jeffcott equations should describe the motion of the rotor's geometric
-        center rather than its center of mass.  """
+        passed to the numerical integrator 'solve_ivp'. 
+        """
         # Unpack the components of X:
         x,dx,y,dy = X
         # Define r = distance from stator centre to rotor centre:
@@ -72,6 +70,7 @@ class Simulation:
                 self.k*y)/self.m]
         
     def solve(self):
+        """Method for actually integrating the equations."""
         t0 = time.time()
         X0 = self.X0
         T = self.T
@@ -85,11 +84,7 @@ class Simulation:
         print("Solution time = {:.2f}s".format(tf-t0))
 
     def transform(self):
-        """New power spectrum density function. Essentially equivalent to the
-        old transform functions above but using only one component (x(t)) of
-        the solution and applying a Hanning window before taking the Fourier
-        transform.
-        """
+        """Method for producing a power spectrum density"""
         t0 = time.time()
         N1 = self.N//2
         T = self.T
