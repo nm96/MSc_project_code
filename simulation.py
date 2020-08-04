@@ -94,8 +94,7 @@ class Simulation:
         transform.
         """
         t0 = time.time()
-        N0 = self.N
-        N1 = N0//2
+        N1 = self.N//2
         T = self.T
         x = self.X[0][N1:]
         w = np.hanning(N1)
@@ -125,7 +124,17 @@ class Simulation:
         plt.tight_layout()
 
     def phase_plot(self):
-        pass
+        N1 = self.N//2
+        x = self.X[0,N1:]
+        y = self.X[2,N1:]
+        tt = self.t[N1:]
+        arr = np.array([np.cos(self.Om*tt)*x + np.sin(self.Om*tt)*y,
+        - np.sin(self.Om*tt)*x + np.cos(self.Om*tt)*y])
+        fig, ax = plt.subplots()
+        ax.plot(*arr)
+        ax.set_aspect('equal')
+        ts = r"""$\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$""".format(self.B,self.Om,self.c)
+        ax.set_title(ts)
 
             
 # Quick test
@@ -133,12 +142,13 @@ class Simulation:
 s1 = Simulation()
 
 s1.B = 1.65
+s1.T = 2**10
 
 s1.solve()
 
 s1.transform()
 
-s1.psd_plot()
+s1.phase_plot()
 
 plt.show()
 
