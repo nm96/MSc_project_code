@@ -28,7 +28,6 @@ class Simulation:
     # Default integration parameters
     X0 = [0.01,0,0,0]
     T = 2**14
-    N = T*2**4
     rtol = 1e-4
     atol = 1e-8
     
@@ -74,7 +73,8 @@ class Simulation:
         t0 = time.time()
         X0 = self.X0
         T = self.T
-        N = self.N
+        N = T*2**4
+        self.N = N
         tspan = (0,T)
         sol = spi.solve_ivp(self.dXdt,tspan,X0,t_eval=np.linspace(0,T,N),
                 rtol=self.rtol,atol=self.atol,method='Radau')
