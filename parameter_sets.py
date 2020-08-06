@@ -40,8 +40,11 @@ beta = 12*mu*b*R2**3
 
 print("Critical Beta = {:.4f}".format(beta))
 
-# Interesting behvaiour with Om_nat > Om:
-B = 1.65
-Om = 0.3
-c = 0.1
-# (Other values from set above)
+# 'Simple' behaviour:
+s1.Om = 0.3; s1.c = 0.01; s1.B = 1.85
+s1.Om = 2.7; s1.c = 0.2; s1.B = 1.6
+s1.OM = 4.1; s1.c = 0.5; s1.B = 0.5
+
+# Multiple-loop behaviour:
+s1.Om = 2.7; s1.c = 0.2; s1.B = 2.2
+s1.Om = 4.1; s1.c = 0.5; s1.B = 1.65

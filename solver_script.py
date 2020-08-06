@@ -5,8 +5,10 @@ s1 = Simulation()
 
 # Set any non-default parameters here:
 
-s1.B = 1.4
-s1.Om = 4.1
+s1.B = 1.85
+s1.Om = 0.3
+#s1.T = 2**10
+s1.c = 0.01
 
 # Solve and save data:
 
