@@ -28,6 +28,7 @@ class Simulation:
     # Default integration parameters
     X0 = [0.01,0,0,0]
     T = 2**14
+    #N = T*2**4
     rtol = 1e-4
     atol = 1e-8
     
@@ -119,6 +120,7 @@ class Simulation:
         plt.tight_layout()
 
     def phase_plot(self,fn=1):
+        self.N = self.T*2**4
         N1 = self.N//2
         x = self.X[0,N1:]
         y = self.X[2,N1:]
