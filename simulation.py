@@ -119,9 +119,9 @@ class Simulation:
         ax.legend()
         plt.tight_layout()
 
-    def phase_plot(self,fn=1):
+    def phase_plot(self,fn=1,d=2):
         self.N = self.T*2**4
-        N1 = self.N//2
+        N1 = self.N - self.N//d
         x = self.X[0,N1:]
         y = self.X[2,N1:]
         tt = self.t[N1:]
