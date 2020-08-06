@@ -87,7 +87,8 @@ class Simulation:
     def transform(self):
         """Method for producing a power spectrum density"""
         t0 = time.time()
-        N1 = self.N//2
+        N = len(self.t)
+        N1 = N//2
         T = self.T
         x = self.X[0][N1:]
         w = np.hanning(N1)
