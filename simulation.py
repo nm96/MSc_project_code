@@ -74,7 +74,7 @@ class Simulation:
         t0 = time.time()
         X0 = self.X0
         T = self.T
-        N = T*2**4
+        N = T*2**6
         self.N = N
         tspan = (0,T)
         sol = spi.solve_ivp(self.dXdt,tspan,X0,t_eval=np.linspace(0,T,N),
@@ -91,6 +91,19 @@ class Simulation:
         N1 = N//2
         T = self.T
         x = self.X[0][N1:]
+        w = np.hanning(N1)
+        self.P = (2/N1)*abs(np.fft.fft(w*x))**2
+        self.om = np.arange(N1)*4*np.pi/T
+        tf = time.time()
+        print("Transform time = {:.2f}s".format(tf-t0))
+
+    def rotated_transform(self):
+        t0 = time.time()
+        N = len(self.t)
+        N1 = N//2
+        T = self.T
+        self.rotate()
+        x = self.rotsolxy[0][N1:]
         w = np.hanning(N1)
         self.P = (2/N1)*abs(np.fft.fft(w*x))**2
         self.om = np.arange(N1)*4*np.pi/T
