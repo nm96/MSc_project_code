@@ -134,3 +134,11 @@ class Simulation:
         ts = r"$\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$"
         ts = ts.format(self.B,self.Om,self.c)
         ax.set_title(ts)
+
+    def rotate(self):
+        x = self.X[0]
+        y = self.X[2]
+        tt = self.t
+        arr = np.array([np.cos(self.Om*tt)*x + np.sin(self.Om*tt)*y,
+        - np.sin(self.Om*tt)*x + np.cos(self.Om*tt)*y])
+        self.rotsolxy = arr
