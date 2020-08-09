@@ -1,20 +1,11 @@
-Short term
-----------
-- Write short scripts which use the new simulation class to replicate and save
-  earlier results
-
-- Produce spectral plots across a range of parameters to illustrate
-  interesting phenomena in Lubrication and VdH models.
-
-- Extend these 'ranges of plots' to full brute-force bifurcations which
-  produce heatmaps / waterfalls plots. Will require extremely long
-  (overnight?) computations.
-
-Long term
----------
 - Generalise dXdt to include cross-constants c1,c2,k1,k2?
+
 - Add more models:
 	- Full Sommerfeld (3.4.2)
 	- Dynamic Half-Sommerfeld (3.4.4) 
 	- One of the friction-based models?
 	- Some kind of 'idealized' artificial nonlinearity?
+
+- Produce heatmap multi-spectrum plots
+
+- Work on continuation and produce bifurcation diagrams
