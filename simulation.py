@@ -148,6 +148,24 @@ class Simulation:
         ts = ts.format(self.B,self.Om,self.c)
         ax.set_title(ts)
 
+    def first_return_plot(self,fn=1):
+        t0 = time.time()
+        X0 = self.X0
+        T = self.T
+        tspan = (0,T)
+        T_Om = 2*np.pi/self.Om
+        t_eval = np.arange(T//T_Om)*T_Om
+        sol = spi.solve_ivp(self.dXdt,tspan,X0,t_eval=t_eval,
+                rtol=self.rtol,atol=self.atol,method='Radau')
+        tf = time.time()
+        print("Solution time = {:.2f}s".format(tf-t0))
+        fig, ax = plt.subplots(num=fn)
+        ax.plot(sol.y[0],sol.y[1],'x')
+        ax.set_aspect('equal')
+        ts = r"$\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$"
+        ts = ts.format(self.B,self.Om,self.c)
+        ax.set_title(ts)
+
     def rotate(self):
         x = self.X[0]
         y = self.X[2]
