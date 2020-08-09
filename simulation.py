@@ -12,9 +12,7 @@ if sys.platform == 'linux':
     matplotlib.rc('text', usetex=True)
 
 
-
 class Simulation:
-
 
     # Default physical parameters:
     eps = 0.2 
@@ -148,7 +146,7 @@ class Simulation:
         ts = ts.format(self.B,self.Om,self.c)
         ax.set_title(ts)
 
-    def first_return_plot(self,fn=1):
+    def first_return_plot(self):
         t0 = time.time()
         X0 = self.X0
         T = self.T
@@ -159,8 +157,14 @@ class Simulation:
                 rtol=self.rtol,atol=self.atol,method='Radau')
         tf = time.time()
         print("Solution time = {:.2f}s".format(tf-t0))
-        fig, ax = plt.subplots(num=fn)
-        ax.plot(sol.y[0],sol.y[1],'x')
+        fig, ax = plt.subplots(num=1)
+        ax.scatter(sol.y[0],sol.y[2],marker='x',c=list(t_eval))
+        ax.set_aspect('equal')
+        ts = r"$\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$"
+        ts = ts.format(self.B,self.Om,self.c)
+        ax.set_title(ts)
+        fig, ax = plt.subplots(num=2)
+        ax.scatter(sol.y[1],sol.y[3],marker='x',c=list(t_eval))
         ax.set_aspect('equal')
         ts = r"$\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$"
         ts = ts.format(self.B,self.Om,self.c)
