@@ -135,12 +135,22 @@ class Simulation:
         self.N = len(self.t)
         N1 = self.N - self.N//d
         Rx,Rdx,Ry,Rdy = self.RX[:,N1:]
-        fig, ax = plt.subplots(num=fn)
+        fig = plt.figure(fn)
+        ax = fig.add_subplot(121)
         ax.plot(Rx,Ry,'.',ms=0.05)
         ax.set_aspect('equal')
-        ts = r"$\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$"
+        ax.set_xlabel("\Large $x$")
+        ax.set_ylabel("\Large $y$",rotation=0)
+        ax = fig.add_subplot(122)
+        ax.plot(Rdx,Rdy,'.',ms=0.05)
+        ax.set_aspect('equal')
+        ax.set_xlabel("\Large $\dot{x}$")
+        ax.set_ylabel("\Large $\dot{y}$",rotation=0)
+        ts = r"""Solution trajectories in the rotating frame 
+        $\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$"""
         ts = ts.format(self.B,self.Om,self.c)
-        ax.set_title(ts)
+        fig.suptitle(ts)
+        plt.tight_layout()
 
     def first_return_plot(self):
         t0 = time.time()
