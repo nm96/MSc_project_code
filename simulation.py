@@ -95,19 +95,6 @@ class Simulation:
         tf = time.time()
         print("Transform time = {:.2f}s".format(tf-t0))
 
-    def rotated_transform(self):
-        t0 = time.time()
-        N = len(self.t)
-        N1 = N//2
-        T = self.T
-        self.rotate()
-        x = self.rotsolxy[0][N1:]
-        w = np.hanning(N1)
-        self.P = (2/N1)*abs(np.fft.fft(w*x))**2
-        self.om = np.arange(N1)*4*np.pi/T
-        tf = time.time()
-        print("Transform time = {:.2f}s".format(tf-t0))
-
     def psd_plot(self,fn=1,om_max=10):
         fig, ax = plt.subplots(num=fn)
         ax.set_xlim([0,om_max])
@@ -171,9 +158,12 @@ class Simulation:
         ax.set_title(ts)
 
     def rotate(self):
-        x = self.X[0]
-        y = self.X[2]
-        tt = self.t
-        arr = np.array([np.cos(self.Om*tt)*x + np.sin(self.Om*tt)*y,
-        - np.sin(self.Om*tt)*x + np.cos(self.Om*tt)*y])
-        self.rotsolxy = arr
+        """Transform all components of the solution to the rotating frame"""
+        x, dx, y, dy = self.X
+        t = self.t
+        Om = self.Om
+        Rx = x*np.cos(Om*t) + y*np.sin(Om*t)
+        Ry = -x*np.sin(Om*t) + y*np.cos(Om*t)
+        Rdx = dx*np.cos(Om*t) + dy*np.sin(Om*t) + Om*Ry
+        Rdy = -dx*np.sin(Om*t) + dy*np.cos(Om*t) - Om*Rx
+        self.RX = np.array([Rx,Rdx,Ry,Rdy])
