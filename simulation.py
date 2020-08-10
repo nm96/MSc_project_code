@@ -96,6 +96,7 @@ class Simulation:
         print("Transform time = {:.2f}s".format(tf-t0))
 
     def psd_plot(self,fn=1,om_max=10):
+        self.transform()
         fig, ax = plt.subplots(num=fn)
         ax.set_xlim([0,om_max])
         om_nat = (self.k/self.m)**0.5
@@ -118,16 +119,24 @@ class Simulation:
         ax.legend()
         plt.tight_layout()
 
+    def rotate(self):
+        """Transform all components of the solution to the rotating frame"""
+        x, dx, y, dy = self.X
+        t = self.t
+        Om = self.Om
+        Rx = x*np.cos(Om*t) + y*np.sin(Om*t)
+        Ry = -x*np.sin(Om*t) + y*np.cos(Om*t)
+        Rdx = dx*np.cos(Om*t) + dy*np.sin(Om*t) + Om*Ry
+        Rdy = -dx*np.sin(Om*t) + dy*np.cos(Om*t) - Om*Rx
+        self.RX = np.array([Rx,Rdx,Ry,Rdy])
+
     def phase_plot(self,fn=1,d=2):
-        self.N = self.T*2**4
+        self.rotate()
+        self.N = len(self.t)
         N1 = self.N - self.N//d
-        x = self.X[0,N1:]
-        y = self.X[2,N1:]
-        tt = self.t[N1:]
-        arr = np.array([np.cos(self.Om*tt)*x + np.sin(self.Om*tt)*y,
-        - np.sin(self.Om*tt)*x + np.cos(self.Om*tt)*y])
+        Rx,Rdx,Ry,Rdy = self.RX[:,N1:]
         fig, ax = plt.subplots(num=fn)
-        ax.plot(*arr)
+        ax.plot(Rx,Ry,'.',ms=0.05)
         ax.set_aspect('equal')
         ts = r"$\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$"
         ts = ts.format(self.B,self.Om,self.c)
@@ -157,13 +166,3 @@ class Simulation:
         ts = ts.format(self.B,self.Om,self.c)
         ax.set_title(ts)
 
-    def rotate(self):
-        """Transform all components of the solution to the rotating frame"""
-        x, dx, y, dy = self.X
-        t = self.t
-        Om = self.Om
-        Rx = x*np.cos(Om*t) + y*np.sin(Om*t)
-        Ry = -x*np.sin(Om*t) + y*np.cos(Om*t)
-        Rdx = dx*np.cos(Om*t) + dy*np.sin(Om*t) + Om*Ry
-        Rdy = -dx*np.sin(Om*t) + dy*np.cos(Om*t) - Om*Rx
-        self.RX = np.array([Rx,Rdx,Ry,Rdy])
