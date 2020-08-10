@@ -9,3 +9,5 @@
 - Produce heatmap multi-spectrum plots
 
 - Work on continuation and produce bifurcation diagrams
+
+- General documentation for the Simulation class
