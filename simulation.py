@@ -82,27 +82,37 @@ class Simulation:
         tf = time.time()
         print("Solution time = {:.2f}s".format(tf-t0))
 
-    def transform(self):
+    def transform(self,R=False):
         """Method for producing a power spectrum density"""
         t0 = time.time()
         N = len(self.t)
         N1 = N//2
         T = self.T
-        x = self.X[0][N1:]
-        w = np.hanning(N1)
-        self.P = (2/N1)*abs(np.fft.fft(w*x))**2
-        self.om = np.arange(N1)*4*np.pi/T
+        if R:
+            self.rotate()
+            x = self.RX[0][N1:]
+            w = np.hanning(N1)
+            self.RP = (2/N1)*abs(np.fft.fft(w*x))**2
+            self.Rom = np.arange(N1)*4*np.pi/T
+        else:
+            x = self.X[0][N1:]
+            w = np.hanning(N1)
+            self.P = (2/N1)*abs(np.fft.fft(w*x))**2
+            self.om = np.arange(N1)*4*np.pi/T
         tf = time.time()
         print("Transform time = {:.2f}s".format(tf-t0))
 
-    def psd_plot(self,fn=1,om_max=10):
-        self.transform()
+    def psd_plot(self,fn=1,om_max=10,R=False):
+        self.transform(R)
         fig, ax = plt.subplots(num=fn)
         ax.set_xlim([0,om_max])
         om_nat = (self.k/self.m)**0.5
         ax.axvline(om_nat,ls='--',c='g',label=r"$\omega_{nat}$")
         ax.axvline(self.Om,ls='--',c='r',label=r"$\Omega$")
-        ax.semilogy(self.om,self.P,c='k')
+        if R:
+            ax.semilogy(self.Rom,self.RP,c='k')
+        else:
+            ax.semilogy(self.om,self.P,c='k')
         locmaj = matplotlib.ticker.LogLocator(base=100,numticks=30) 
         ax.yaxis.set_major_locator(locmaj)
         locmin = matplotlib.ticker.LogLocator(base=100,subs=(0.2,0.4,0.6,0.8),
