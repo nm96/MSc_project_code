@@ -9,5 +9,6 @@ with open(inpf,'rb') as f:
     s1 = pickle.load(f)
 
 s1.phase_plot(d=2)
+plt.savefig(s1.phase_plot_filename)
 
 plt.show()

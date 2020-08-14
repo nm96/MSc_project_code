@@ -102,9 +102,9 @@ class Simulation:
         tf = time.time()
         print("Transform time = {:.2f}s".format(tf-t0))
 
-    def psd_plot(self,fn=1,om_max=10,R=False):
+    def psd_plot(self,fn=1,om_max=10,R=False,fs=[6,4]):
         self.transform(R)
-        fig, ax = plt.subplots(num=fn)
+        fig, ax = plt.subplots(num=fn,figsize=fs)
         ax.set_xlim([0,om_max])
         om_nat = (self.k/self.m)**0.5
         ax.axvline(om_nat,ls='--',c='g',label=r"$\omega_{nat}$")
@@ -128,6 +128,8 @@ class Simulation:
         ax.set_xlabel("$\omega$")
         ax.legend()
         plt.tight_layout()
+        fnm = "../plots/B{:.2f}Om{:.2f}c{:.2f}psdplot.eps"
+        self.psd_plot_filename = fnm.format(self.B,self.Om,self.c)
 
     def rotate(self):
         """Transform all components of the solution to the rotating frame"""
@@ -140,12 +142,12 @@ class Simulation:
         Rdy = -dx*np.sin(Om*t) + dy*np.cos(Om*t) - Om*Rx
         self.RX = np.array([Rx,Rdx,Ry,Rdy])
 
-    def phase_plot(self,fn=1,d=2):
+    def phase_plot(self,fn=1,d=2,fs=[6,4]):
         self.rotate()
         self.N = len(self.t)
         N1 = self.N - self.N//d
         Rx,Rdx,Ry,Rdy = self.RX[:,N1:]
-        fig = plt.figure(fn)
+        fig = plt.figure(fn,figsize=fs)
         ax = fig.add_subplot(121)
         ax.plot(Rx,Ry,'.',ms=0.05)
         ax.set_aspect('equal')
@@ -161,6 +163,8 @@ class Simulation:
         ts = ts.format(self.B,self.Om,self.c)
         fig.suptitle(ts)
         plt.tight_layout()
+        fnm = "../plots/B{:.2f}Om{:.2f}c{:.2f}phaseplot.eps"
+        self.phase_plot_filename = fnm.format(self.B,self.Om,self.c)
 
     def first_return_plot(self):
         t0 = time.time()

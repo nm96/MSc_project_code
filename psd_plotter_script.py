@@ -11,4 +11,6 @@ with open(inpf,'rb') as f:
 #s1.psd_plot(R=True,om_max=20)
 s1.psd_plot()
 
+plt.savefig(s1.psd_plot_filename)
+
 plt.show()
