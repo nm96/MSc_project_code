@@ -110,9 +110,9 @@ class Simulation:
         ax.axvline(om_nat,ls='--',c='g',label=r"$\omega_{nat}$")
         ax.axvline(self.Om,ls='--',c='r',label=r"$\Omega$")
         if R:
-            ax.semilogy(self.Rom,self.RP,c='k')
+            ax.semilogy(self.Rom,self.RP,c='k',linewidth=1)
         else:
-            ax.semilogy(self.om,self.P,c='k')
+            ax.semilogy(self.om,self.P,c='k',linewidth=1)
         locmaj = matplotlib.ticker.LogLocator(base=100,numticks=30) 
         ax.yaxis.set_major_locator(locmaj)
         locmin = matplotlib.ticker.LogLocator(base=100,subs=(0.2,0.4,0.6,0.8),
@@ -151,13 +151,13 @@ class Simulation:
         ax = fig.add_subplot(121)
         ax.plot(Rx,Ry,'.',ms=0.05)
         ax.set_aspect('equal')
-        ax.set_xlabel("\Large $x$")
-        ax.set_ylabel("\Large $y$",rotation=0)
+        ax.set_xlabel(r"\Large $\tilde{x}$")
+        ax.set_ylabel(r"\Large $\tilde{y}$",rotation=0)
         ax = fig.add_subplot(122)
         ax.plot(Rdx,Rdy,'.',ms=0.05)
         ax.set_aspect('equal')
-        ax.set_xlabel("\Large $\dot{x}$")
-        ax.set_ylabel("\Large $\dot{y}$",rotation=0)
+        ax.set_xlabel(r"\Large $\dot{\tilde{x}}$")
+        ax.set_ylabel(r"\Large $\dot{\tilde{y}}$",rotation=0)
         ts = r"""Solution trajectories in the rotating frame 
         $\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$"""
         ts = ts.format(self.B,self.Om,self.c)
