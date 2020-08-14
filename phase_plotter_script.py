@@ -9,6 +9,6 @@ with open(inpf,'rb') as f:
     s1 = pickle.load(f)
 
 s1.phase_plot(d=2)
-plt.savefig("../report/B0_5phaseplot.png",dpi=400)
+#plt.savefig("../report/B0_5phaseplot.png",dpi=400)
 
 plt.show()
