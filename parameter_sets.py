@@ -43,7 +43,7 @@ print("Critical Beta = {:.4f}".format(beta))
 # 'Simple' behaviour:
 s1.Om = 0.3; s1.c = 0.01; s1.B = 1.85
 s1.Om = 2.7; s1.c = 0.2; s1.B = 1.6
-s1.OM = 4.1; s1.c = 0.5; s1.B = 0.5
+s1.Om = 4.1; s1.c = 0.5; s1.B = 0.5
 
 # Multiple-loop behaviour:
 s1.Om = 2.7; s1.c = 0.2; s1.B = 2.2
