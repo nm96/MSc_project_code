@@ -135,7 +135,7 @@ class Simulation:
     def find_peaks(self,om_max=10):
         P = self.P[self.om < om_max]
         om = self.om[self.om < om_max]
-        self.peaks = om[sps.find_peaks(P,prominence=1e-6)[0]]
+        self.peaks = om[sps.find_peaks(P,prominence=1e-5)[0]]
 
     def rotate(self):
         """Transform all components of the solution to the rotating frame"""
