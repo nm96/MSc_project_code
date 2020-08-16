@@ -1,5 +1,6 @@
 import numpy as np
 import scipy.integrate as spi
+import scipy.signal as sps
 import matplotlib
 import matplotlib.pyplot as plt
 import pickle
@@ -130,6 +131,11 @@ class Simulation:
         plt.tight_layout()
         fnm = "../plots/B{:.2f}Om{:.2f}c{:.2f}psdplot.eps"
         self.psd_plot_filename = fnm.format(self.B,self.Om,self.c)
+
+    def find_peaks(self,om_max=10):
+        P = self.P[self.om < om_max]
+        om = self.om[self.om < om_max]
+        self.peaks = om[sps.find_peaks(P,prominence=1e-6)[0]]
 
     def rotate(self):
         """Transform all components of the solution to the rotating frame"""
