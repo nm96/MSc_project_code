@@ -93,8 +93,8 @@ class Simulation:
             self.rotate()
             x = self.RX[0][N1:]
             w = np.hanning(N1)
-            self.RP = (2/N1)*abs(np.fft.fft(w*x))**2
-            self.Rom = np.arange(N1)*4*np.pi/T
+            self.P = (2/N1)*abs(np.fft.fft(w*x))**2
+            self.om = np.arange(N1)*4*np.pi/T
         else:
             x = self.X[0][N1:]
             w = np.hanning(N1)
@@ -110,10 +110,7 @@ class Simulation:
         om_nat = (self.k/self.m)**0.5
         ax.axvline(om_nat,ls='--',c='g',label=r"$\omega_{nat}$")
         ax.axvline(self.Om,ls='--',c='r',label=r"$\Omega$")
-        if R:
-            ax.semilogy(self.Rom,self.RP,c='k',linewidth=1)
-        else:
-            ax.semilogy(self.om,self.P,c='k',linewidth=1)
+        ax.semilogy(self.om,self.P,c='k',linewidth=1)
         locmaj = matplotlib.ticker.LogLocator(base=100,numticks=30) 
         ax.yaxis.set_major_locator(locmaj)
         locmin = matplotlib.ticker.LogLocator(base=100,subs=(0.2,0.4,0.6,0.8),
