@@ -116,12 +116,12 @@ class Simulation:
         ax.yaxis.set_minor_locator(locmin)
         ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
         ax.grid()
-        ts = r"$\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$"
-        ts = ts.format(self.B,self.Om,self.c)
-        ax.set_title(ts)
         ax.set_ylabel("$P(\omega)$",rotation=0)
         ax.yaxis.labelpad = 20
         ax.set_xlabel("$\omega$")
+        ts = r"$\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$"
+        ts = ts.format(self.B,self.Om,self.c)
+        ax.set_title(ts)
         if R == False:
             ax.axvline(om_nat,ls='--',c='g',label=r"$\omega_{nat}$")
             ax.axvline(self.Om,ls='--',c='r',label=r"$\Omega$")
