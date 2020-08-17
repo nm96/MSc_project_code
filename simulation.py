@@ -108,8 +108,6 @@ class Simulation:
         fig, ax = plt.subplots(num=fn,figsize=fs)
         ax.set_xlim([0,om_max])
         om_nat = (self.k/self.m)**0.5
-        ax.axvline(om_nat,ls='--',c='g',label=r"$\omega_{nat}$")
-        ax.axvline(self.Om,ls='--',c='r',label=r"$\Omega$")
         ax.semilogy(self.om,self.P,c='k',linewidth=1)
         locmaj = matplotlib.ticker.LogLocator(base=100,numticks=30) 
         ax.yaxis.set_major_locator(locmaj)
@@ -124,7 +122,10 @@ class Simulation:
         ax.set_ylabel("$P(\omega)$",rotation=0)
         ax.yaxis.labelpad = 20
         ax.set_xlabel("$\omega$")
-        ax.legend()
+        if R == False:
+            ax.axvline(om_nat,ls='--',c='g',label=r"$\omega_{nat}$")
+            ax.axvline(self.Om,ls='--',c='r',label=r"$\Omega$")
+            ax.legend()
         plt.tight_layout()
         fnm = "../plots/B{:.2f}Om{:.2f}c{:.2f}psdplot.eps"
         self.psd_plot_filename = fnm.format(self.B,self.Om,self.c)

@@ -12,7 +12,8 @@ s1.phase_plot(d=2)
 
 # Save commands
 #plt.savefig("../report/B1_65phaseplot.png",dpi=400)
-plt.savefig("../report/Om2_7phaseplot.png",dpi=400)
+#plt.savefig("../report/B1_5phaseplot.png",dpi=400)
+#plt.savefig("../report/Om2_7phaseplot.png",dpi=400)
 #plt.savefig("../report/Om0_3phaseplot.png",dpi=400)
 
 plt.show()
