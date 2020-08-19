@@ -8,6 +8,13 @@ s1 = Simulation()
 s1.Om = 0.17; s1.c = 0.05; s1.B = 2.720
 s1.T = 2**12
 
+# The following effectively removes m from the equations without affecting
+# anything:
+s1.m *= 0.1
+s1.c *= 0.1
+s1.k *= 0.1
+s1.B *= 0.1
+
 # Solve and save data:
 
 s1.solve()
