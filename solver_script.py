@@ -5,15 +5,18 @@ s1 = Simulation()
 
 # Set any non-default parameters here:
 
-s1.Om = 0.17; s1.c = 0.05; s1.B = 2.720
-s1.T = 2**12
+s1.Om = 1
+s1.B = 20.45
+s1.c = 50
+s1.k = 0.00
+s1.T = 2**10
 
 # The following effectively removes m from the equations without affecting
 # anything:
-s1.m *= 0.1
-s1.c *= 0.1
-s1.k *= 0.1
-s1.B *= 0.1
+#s1.m *= 0.1
+#s1.c *= 0.1
+#s1.k *= 0.1
+#s1.B *= 0.1
 
 # Solve and save data:
 

@@ -26,7 +26,7 @@ class Simulation:
 
     # Default integration parameters
     X0 = [0.01,0,0,0]
-    T = 2**10
+    T = 2**14
     #N = T*2**4
     rtol = 1e-4
     atol = 1e-8

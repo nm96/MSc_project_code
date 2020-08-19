@@ -51,3 +51,9 @@ s1.Om = 0.17; s1.c = 0.05; s1.B = 2.5 # Increase B from 2.5 to 2.725 to observe
 # period-doubling.
 s1.Om = 2.7; s1.c = 0.2; s1.B = 2.2
 s1.Om = 4.1; s1.c = 0.5; s1.B = 1.65
+
+# Setting stiffness to zero
+s1.Om = 1
+s1.B = 16
+s1.c = 50
+s1.k = 0.00
