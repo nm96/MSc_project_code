@@ -15,10 +15,10 @@ ax = plt.gca()
 
 s1.find_peaks()
 
-n = 1
-for om in s1.peaks:
-    print("\t ${}\\tilde{{\omega}}_1$ \t & \t ${:.3f}$ \t \\\\".format(n,om))
-    n += 1
+#n = 1
+#for om in s1.peaks:
+#    print("\t ${}\\tilde{{\omega}}_1$ \t & \t ${:.3f}$ \t \\\\".format(n,om))
+#    n += 1
 
 
 # Save commands

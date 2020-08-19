@@ -26,7 +26,7 @@ class Simulation:
 
     # Default integration parameters
     X0 = [0.01,0,0,0]
-    T = 2**14
+    T = 2**10
     #N = T*2**4
     rtol = 1e-4
     atol = 1e-8
@@ -64,10 +64,10 @@ class Simulation:
         F_y = -fn*sPsi - ft*cPsi
         # Final result (1st order Jeffcott eqns):
         return [dx, (F_x + self.eps*self.m*np.cos(self.Om*t)*self.Om**2 -
-            self.c*dx - self.k*x)/self.m, dy, (F_y +
-                self.eps*self.m*np.sin(self.Om*t)*self.Om**2 - self.c*dy -
-                self.k*y)/self.m]
-        
+        self.c*dx - self.k*x)/self.m, dy, (F_y +
+        self.eps*self.m*np.sin(self.Om*t)*self.Om**2 - self.c*dy -
+        self.k*y)/self.m]
+
     def solve(self):
         """Method for actually integrating the equations."""
         t0 = time.time()
@@ -119,7 +119,7 @@ class Simulation:
         ax.set_ylabel("$P(\omega)$",rotation=0)
         ax.yaxis.labelpad = 20
         ax.set_xlabel("$\omega$")
-        ts = r"$\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$"
+        ts = r"$\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"
         ts = ts.format(self.B,self.Om,self.c)
         ax.set_title(ts)
         if R == False:
@@ -163,7 +163,7 @@ class Simulation:
         ax.set_xlabel(r"\Large $\dot{\tilde{x}}$")
         ax.set_ylabel(r"\Large $\dot{\tilde{y}}$",rotation=0)
         ts = r"""Solution trajectories in the rotating frame 
-        $\beta={:.2f}$, $\Omega={:.2f}$, $c={:.2f}$"""
+        $\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"""
         ts = ts.format(self.B,self.Om,self.c)
         fig.suptitle(ts)
         plt.tight_layout()
