@@ -8,7 +8,7 @@ inpf = sys.argv[1] # Get input file from commmand line
 with open(inpf,'rb') as f:
     s1 = pickle.load(f)
 
-s1.psd_plot(R=True,om_max=2)
+s1.psd_plot(R=True,om_max=10)
 
 s1.find_peaks()
 
