@@ -1,7 +1,7 @@
 import simulation
 
 om_1_set = []
-B_set = [1.1, 1.3, 1.5, 1.7]
+B_set = [1.30, 1.35, 1.40, 1.45, 1.50, 1.55, 1.60, 1.65]
 
 for B in B_set:
     s = simulation.Simulation()

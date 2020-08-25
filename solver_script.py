@@ -5,11 +5,8 @@ s1 = Simulation()
 
 # Set any non-default parameters here:
 
-s1.Om = 1
-s1.B = 20.45
-s1.c = 50
-s1.k = 0.00
-s1.T = 2**10
+s1.B = 1.45
+s1.T = 2**16
 
 # The following effectively removes m from the equations without affecting
 # anything:
