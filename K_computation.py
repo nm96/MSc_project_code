@@ -1,12 +1,12 @@
 import simulation
 
 om_1_set = []
-B_set = [1.30, 1.35, 1.40, 1.45, 1.50, 1.55, 1.60, 1.65]
+B_set = [0.50, 1.65, 1.75]
 
 for B in B_set:
     s = simulation.Simulation()
     s.B = B
-    s.T = 2**14
+    s.T = 2**12
     s.solve()
     s.transform(R=True)
     s.find_peaks()

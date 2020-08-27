@@ -1,6 +1,7 @@
 import numpy as np
 import scipy.integrate as spi
 import scipy.signal as sps
+import scipy.optimize as spo
 import matplotlib
 import matplotlib.pyplot as plt
 import pickle
@@ -82,6 +83,37 @@ class Simulation:
         self.X = sol.y
         tf = time.time()
         print("Solution time = {:.2f}s".format(tf-t0))
+
+    def solve_to(self,X0,Tp):
+        """Method used to find period orbits with the shooting method. Given
+        initial condition X0 and period T, solve up to t=T and return the
+        position ~in the rotating frame~ - for a periodic orbit, we want this
+        to be equal to X0.
+        """
+        sol = spi.solve_ivp(self.dXdt,(0,Tp),X0,
+                rtol=self.rtol,atol=self.atol,method='Radau')
+        Xf = sol.y[:,-1]
+        # Transform to the rotating frame:
+        x, dx, y, dy = Xf
+        t = Tp
+        Om = self.Om
+        Rx = x*np.cos(Om*t) + y*np.sin(Om*t)
+        Ry = -x*np.sin(Om*t) + y*np.cos(Om*t)
+        Rdx = dx*np.cos(Om*t) + dy*np.sin(Om*t) + Om*Ry
+        Rdy = -dx*np.sin(Om*t) + dy*np.cos(Om*t) - Om*Rx
+        return np.array([Rx,Rdx,Ry,Rdy])
+
+    def shoot_for_period(self):
+        def G(Y):
+            """Function for measuring closeness to a periodic orbit. Y is a
+            vector composed of an initial condition vector X0 with a period
+            appended"""
+            X0 = Y[:-1]
+            Tp = Y[-1]
+            return [np.linalg.norm(self.solve_to(X0,Tp) - X0),0,0,0,0]
+        Y0 = np.array([*self.X0, 1])
+        Yr = spo.root(G,Y0)
+        self.Tp = Yr.x[-1]
 
     def transform(self,R=False):
         """Method for producing a power spectrum density"""
