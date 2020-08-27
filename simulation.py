@@ -85,7 +85,7 @@ class Simulation:
         print("Solution time = {:.2f}s".format(tf-t0))
 
     def solve_to(self,X0,Tp):
-        """Method used to find period orbits with the shooting method. Given
+        """Method used to find periodic orbits with the shooting method. Given
         initial condition X0 and period T, solve up to t=T and return the
         position ~in the rotating frame~ - for a periodic orbit, we want this
         to be equal to X0.
