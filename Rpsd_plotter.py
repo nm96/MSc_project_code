@@ -12,10 +12,12 @@ s1.psd_plot(R=True,om_max=10)
 
 s1.find_peaks()
 
-n = 1
-for om in s1.peaks:
-    print("\t ${}\\tilde{{\omega}}_1$ \t & \t ${:.6f}$ \t \\\\".format(n,om))
-    n += 1
+print(s1.peaks[0])
+
+#n = 1
+#for om in s1.peaks:
+#    print("\t ${}\\tilde{{\omega}}_1$ \t & \t ${:.6f}$ \t \\\\".format(n,om))
+#    n += 1
 
 
 # Save commands
