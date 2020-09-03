@@ -1,8 +1,15 @@
 from simulation import Simulation
 import matplotlib.pyplot as plt
+import sys
+import pickle
+import numpy as np
 
-s1 = Simulation()
+inpf = sys.argv[1] # Get input file from commmand line
 
-s1.shoot_for_period()
+with open(inpf,'rb') as f:
+    s1 = pickle.load(f)
+
+s1.find_period()
 
 print(s1.Tp)
+print(2*np.pi/s1.Tp)

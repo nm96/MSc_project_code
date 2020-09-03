@@ -202,6 +202,21 @@ class Simulation:
         fnm = "../plots/B{:.2f}Om{:.2f}c{:.2f}phaseplot.eps"
         self.phase_plot_filename = fnm.format(self.B,self.Om,self.c)
 
+    def find_period(self,tol=0.5):
+        """Find the period of an existing solution by comparing the rotated
+        trajectory time series with itself. Slightly rough at present, may
+        accidentally return multiples of the period.
+        """
+        self.rotate()
+        tail = self.RX[:,-100:]
+        k = 9
+        seg = self.RX[:,-k-100:-k]
+        while np.linalg.norm(tail-seg) > tol:
+            k += 1
+            seg = self.RX[:,-k-100:-k]
+        print(k)
+        self.Tp = k*self.t[1]
+
     def first_return_plot(self):
         t0 = time.time()
         X0 = self.X0
