@@ -5,11 +5,9 @@ s1 = Simulation()
 
 # Set any non-default parameters here:
 
-s1.Om = 1
-s1.B = 1
-s1.eps = 0.2
-s1.c = 0
-s1.k = 0
+s1.B = 1.65
+
+s1.c = 0.4
 
 s1.T = 2**14
 

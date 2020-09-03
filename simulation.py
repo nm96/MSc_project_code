@@ -202,7 +202,7 @@ class Simulation:
         fnm = "../plots/B{:.2f}Om{:.2f}c{:.2f}phaseplot.eps"
         self.phase_plot_filename = fnm.format(self.B,self.Om,self.c)
 
-    def find_period(self,tol=0.5):
+    def basic_find_period(self,tol=0.5):
         """Find the period of an existing solution by comparing the rotated
         trajectory time series with itself. Slightly rough at present, may
         accidentally return multiples of the period.
@@ -216,6 +216,16 @@ class Simulation:
             seg = self.RX[:,-k-100:-k]
         print(k)
         self.Tp = k*self.t[1]
+
+    def find_period(self):
+        """Find period using Fourier transforms - more accurate than the direct
+        time series method. This is essentially just a wrapper around
+        find_peaks()
+        """
+        self.transform(R=True)
+        self.find_peaks()
+        self.Tp = 2*np.pi/self.peaks[0]
+
 
     def first_return_plot(self):
         t0 = time.time()
