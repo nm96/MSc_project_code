@@ -133,7 +133,7 @@ class Simulation:
             self.P = (2/N1)*abs(np.fft.fft(w*x))**2
             self.om = np.arange(N1)*4*np.pi/T
         tf = time.time()
-        print("Transform time = {:.2f}s".format(tf-t0))
+        #print("Transform time = {:.2f}s".format(tf-t0))
 
     def psd_plot(self,fn=1,om_max=10,R=False,fs=[6,4]):
         self.transform(R)

@@ -2,9 +2,9 @@ import simulation
 import numpy as np
 import pickle
 
-c_set = np.linspace(0.2,0.6,21)
 periods = []
 
+c_set = np.linspace(0.2,0.6,21)
 for c in c_set:
     s = simulation.Simulation()
     s.B = 1.65
@@ -14,4 +14,5 @@ for c in c_set:
     s.find_period()
     periods.append(s.Tp)
 
-print(c_set,periods)
+for k in range(len(c_set)):
+    print("c = {:.2f} --> Tp = {:.4f}".format(c_set[k], periods[k]))

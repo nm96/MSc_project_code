@@ -11,5 +11,5 @@ with open(inpf,'rb') as f:
 
 s1.find_period()
 
-print(s1.Tp)
-print(2*np.pi/s1.Tp)
+print("Period =", s1.Tp)
+print("Base Frequency =", 2*np.pi/s1.Tp)
