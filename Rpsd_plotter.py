@@ -2,6 +2,7 @@ from simulation import Simulation
 import sys
 import pickle
 import matplotlib.pyplot as plt
+import numpy as np
 
 inpf = sys.argv[1] # Get input file from commmand line
 
@@ -12,7 +13,7 @@ s1.psd_plot(R=True,om_max=10)
 
 s1.find_peaks()
 
-print(s1.peaks[0])
+print("om1 = {:.3f}, Tp = {:.3f}".format(s1.peaks[0], 2*np.pi/s1.peaks[0]))
 
 #n = 1
 #for om in s1.peaks:
