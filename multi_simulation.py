@@ -45,10 +45,10 @@ def period_at(B,c):
     s.find_period()
     return s.Tp
 
-N = 11
+N = 21
 M = 6
 
-B_range = (1.2,1.3)
+B_range = (1.2,1.7)
 c_range = (0.4,0.7)
 
 B_set = np.linspace(*B_range,N)
