@@ -12,9 +12,14 @@ ar = 3/2
 
 fig = plt.figure(figsize = [6.4, ar*6.4])
 
-ax1 = fig.add_axes([0.1, 0.1/ar, 0.8, 0.3]) # Dimensions as fractions of fig width/height.
-ax2 = fig.add_axes([0.1, 0.3 + 0.2/ar, 0.3, 0.3])
-ax2 = fig.add_axes([0.6, 0.3 + 0.2/ar, 0.3, 0.3])
+ax1 = fig.add_axes([0.1, 0.1/ar, 0.8, 0.2]) # Dimensions as fractions of fig width/height.
+ax2 = fig.add_axes([0.1, 0.2 + 0.2/ar, 0.8, 0.2])
+ax3 = fig.add_axes([0.1, 0.45 + 0.2/ar, 0.35, 0.35/ar])
+ax4 = fig.add_axes([0.55, 0.45 + 0.2/ar, 0.35, 0.35/ar])
+
+s1.phase_plot(axes=(ax3,ax4))
+s1.psd_plot(ax = ax1)
+s1.psd_plot(R=True, ax = ax2)
 
 
 plt.show()

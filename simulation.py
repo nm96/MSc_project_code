@@ -179,27 +179,29 @@ class Simulation:
         Rdy = -dx*np.sin(Om*t) + dy*np.cos(Om*t) - Om*Rx
         self.RX = np.array([Rx,Rdx,Ry,Rdy])
 
-    def phase_plot(self,fn=1,d=2,fs=[6,4],ax=None):
+    def phase_plot(self,fn=1,d=2,fs=[6,4],axes=None):
         self.rotate()
         self.N = len(self.t)
         N1 = self.N - self.N//d
         Rx,Rdx,Ry,Rdy = self.RX[:,N1:]
-        if ax == None:
+        if axes == None:
             fig = plt.figure(fn,figsize=fs)
-            ax = fig.add_subplot(121)
-        ax.plot(Rx,Ry,'.',ms=0.05)
-        ax.set_aspect('equal')
-        ax.set_xlabel(r"\Large $\tilde{x}$")
-        ax.set_ylabel(r"\Large $\tilde{y}$",rotation=0)
-        ax = fig.add_subplot(122)
-        ax.plot(Rdx,Rdy,'.',ms=0.05)
-        ax.set_aspect('equal')
-        ax.set_xlabel(r"\Large $\dot{\tilde{x}}$")
-        ax.set_ylabel(r"\Large $\dot{\tilde{y}}$",rotation=0)
-        ts = r"""Solution trajectories in the rotating frame 
-        $\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"""
-        ts = ts.format(self.B,self.Om,self.c)
-        fig.suptitle(ts)
+            ax1 = fig.add_subplot(121)
+            ax2 = fig.add_subplot(122)
+        else:
+            ax1, ax2 = axes
+        ax1.plot(Rx,Ry,'.',ms=0.05)
+        ax1.set_aspect('equal')
+        ax1.set_xlabel(r"\Large $\tilde{x}$")
+        ax1.set_ylabel(r"\Large $\tilde{y}$",rotation=0)
+        ax2.plot(Rdx,Rdy,'.',ms=0.05)
+        ax2.set_aspect('equal')
+        ax2.set_xlabel(r"\Large $\dot{\tilde{x}}$")
+        ax2.set_ylabel(r"\Large $\dot{\tilde{y}}$",rotation=0)
+        #ts = r"""Solution trajectories in the rotating frame 
+        #$\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"""
+        #ts = ts.format(self.B,self.Om,self.c)
+        #fig.suptitle(ts)
         plt.tight_layout()
         fnm = "../plots/B{:.2f}Om{:.2f}c{:.2f}phaseplot.eps"
         self.phase_plot_filename = fnm.format(self.B,self.Om,self.c)
