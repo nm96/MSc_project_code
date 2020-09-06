@@ -139,6 +139,9 @@ class Simulation:
         self.transform(R)
         if ax == None:
             fig, ax = plt.subplots(num=fn,figsize=fs)
+            multi = False
+        else:
+            multi = True
         ax.set_xlim([0,om_max])
         om_nat = (self.k/self.m)**0.5
         ax.semilogy(self.om,self.P,c='k',linewidth=1)
@@ -152,14 +155,15 @@ class Simulation:
         ax.set_ylabel("$P(\omega)$",rotation=0)
         ax.yaxis.labelpad = 20
         ax.set_xlabel("$\omega$")
-        ts = r"$\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"
-        ts = ts.format(self.B,self.Om,self.c)
-        ax.set_title(ts)
+        if multi == False:
+            ts = r"$\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"
+            ts = ts.format(self.B,self.Om,self.c)
+            ax.set_title(ts)
+            plt.tight_layout()
         if R == False:
             ax.axvline(om_nat,ls='--',c='g',label=r"$\omega_{nat}$")
             ax.axvline(self.Om,ls='--',c='r',label=r"$\Omega$")
             ax.legend()
-        plt.tight_layout()
         fnm = "../plots/B{:.2f}Om{:.2f}c{:.2f}psdplot.eps"
         self.psd_plot_filename = fnm.format(self.B,self.Om,self.c)
 
@@ -188,6 +192,11 @@ class Simulation:
             fig = plt.figure(fn,figsize=fs)
             ax1 = fig.add_subplot(121)
             ax2 = fig.add_subplot(122)
+            ts = r"""Solution trajectories in the rotating frame 
+            $\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"""
+            ts = ts.format(self.B,self.Om,self.c)
+            fig.suptitle(ts)
+            plt.tight_layout()
         else:
             ax1, ax2 = axes
         ax1.plot(Rx,Ry,'.',ms=0.05)
@@ -198,11 +207,6 @@ class Simulation:
         ax2.set_aspect('equal')
         ax2.set_xlabel(r"\Large $\dot{\tilde{x}}$")
         ax2.set_ylabel(r"\Large $\dot{\tilde{y}}$",rotation=0)
-        #ts = r"""Solution trajectories in the rotating frame 
-        #$\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"""
-        #ts = ts.format(self.B,self.Om,self.c)
-        #fig.suptitle(ts)
-        plt.tight_layout()
         fnm = "../plots/B{:.2f}Om{:.2f}c{:.2f}phaseplot.eps"
         self.phase_plot_filename = fnm.format(self.B,self.Om,self.c)
 
