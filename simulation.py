@@ -135,9 +135,10 @@ class Simulation:
         tf = time.time()
         #print("Transform time = {:.2f}s".format(tf-t0))
 
-    def psd_plot(self,fn=1,om_max=10,R=False,fs=[6,4]):
+    def psd_plot(self,fn=1,om_max=10,R=False,fs=[6,4],ax=None):
         self.transform(R)
-        fig, ax = plt.subplots(num=fn,figsize=fs)
+        if ax == None:
+            fig, ax = plt.subplots(num=fn,figsize=fs)
         ax.set_xlim([0,om_max])
         om_nat = (self.k/self.m)**0.5
         ax.semilogy(self.om,self.P,c='k',linewidth=1)
@@ -178,13 +179,14 @@ class Simulation:
         Rdy = -dx*np.sin(Om*t) + dy*np.cos(Om*t) - Om*Rx
         self.RX = np.array([Rx,Rdx,Ry,Rdy])
 
-    def phase_plot(self,fn=1,d=2,fs=[6,4]):
+    def phase_plot(self,fn=1,d=2,fs=[6,4],ax=None):
         self.rotate()
         self.N = len(self.t)
         N1 = self.N - self.N//d
         Rx,Rdx,Ry,Rdy = self.RX[:,N1:]
-        fig = plt.figure(fn,figsize=fs)
-        ax = fig.add_subplot(121)
+        if ax == None:
+            fig = plt.figure(fn,figsize=fs)
+            ax = fig.add_subplot(121)
         ax.plot(Rx,Ry,'.',ms=0.05)
         ax.set_aspect('equal')
         ax.set_xlabel(r"\Large $\tilde{x}$")
