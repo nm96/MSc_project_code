@@ -22,4 +22,10 @@ s1.psd_plot(ax = ax1)
 s1.psd_plot(R=True, ax = ax2)
 
 
+ts = r"""Simulation results with parameters
+$\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"""
+ts = ts.format(s1.B,s1.Om,s1.c)
+fig.suptitle(ts)
+
+
 plt.show()
