@@ -167,6 +167,36 @@ class Simulation:
         fnm = "../plots/B{:.2f}Om{:.2f}c{:.2f}psdplot.eps"
         self.psd_plot_filename = fnm.format(self.B,self.Om,self.c)
 
+    def Rpsd_plot(self,fn=1,om_max=10,fs=[6,4],ax=None):
+        self.transform(R=True)
+        if ax == None:
+            fig, ax = plt.subplots(num=fn,figsize=fs)
+            multi = False
+        else:
+            multi = True
+        ax.set_xlim([0,om_max])
+        om_nat = (self.k/self.m)**0.5
+        ax.semilogy(self.om,self.P,c='k',linewidth=1)
+        locmaj = matplotlib.ticker.LogLocator(base=100,numticks=30) 
+        ax.yaxis.set_major_locator(locmaj)
+        locmin = matplotlib.ticker.LogLocator(base=100,subs=(0.2,0.4,0.6,0.8),
+                numticks=50)
+        ax.yaxis.set_minor_locator(locmin)
+        ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
+        ax.grid()
+        ax.set_ylabel("$P(\omega)$",rotation=0)
+        ax.yaxis.labelpad = 20
+        ax.set_xlabel("$\omega$")
+        if multi == False:
+            ts = r"$\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"
+            ts = ts.format(self.B,self.Om,self.c)
+            ax.set_title(ts)
+            plt.tight_layout()
+        self.find_peaks()
+        om_1 = self.peaks[0]
+        ax.axvline(om_1,ls='--',c='b',label=r"$\omega_1$")
+        ax.legend()
+
     def find_peaks(self,om_max=10):
         P = self.P[self.om < om_max]
         om = self.om[self.om < om_max]

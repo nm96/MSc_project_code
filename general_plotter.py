@@ -19,7 +19,7 @@ ax4 = fig.add_axes([0.6, 0.55 + 0.2/ar, 0.3, 0.3/ar])
 
 s1.phase_plot(axes=(ax3,ax4))
 s1.psd_plot(ax = ax1)
-s1.psd_plot(R=True, ax = ax2)
+s1.Rpsd_plot(ax = ax2)
 
 
 ts = r"""Simulation Results With Parameters
