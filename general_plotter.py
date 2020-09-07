@@ -12,22 +12,26 @@ ar = 4/3
 
 fig = plt.figure(figsize = [6.4, ar*6.4])
 
-ax1 = fig.add_axes([0.2, 0.1/ar, 0.7, 0.2]) # Dimensions as fractions of fig width/height.
-ax2 = fig.add_axes([0.2, 0.23 + 0.2/ar, 0.7, 0.2])
-ax3 = fig.add_axes([0.2, 0.55 + 0.2/ar, 0.3, 0.3/ar])
-ax4 = fig.add_axes([0.6, 0.55 + 0.2/ar, 0.3, 0.3/ar])
+ax1 = fig.add_axes([0.2, 0.1/ar, 0.7, 0.18]) # Dimensions as fractions of fig width/height.
+ax2 = fig.add_axes([0.2, 0.2 + 0.2/ar, 0.7, 0.18])
+ax3 = fig.add_axes([0.2, 0.5 + 0.2/ar, 0.3, 0.3/ar])
+ax4 = fig.add_axes([0.6, 0.5 + 0.2/ar, 0.3, 0.3/ar])
 
 s1.phase_plot(axes=(ax3,ax4))
 s1.psd_plot(ax = ax1)
 s1.Rpsd_plot(ax = ax2)
 
+ax1.set_title(r"PSD plot for lateral motion in the stationary frame")
+ax2.set_title(r"PSD plot for lateral motion in the rotating frame")
+
+fig.text(0.4, 0.89, r"Phase space trajectories",fontsize=12)
 
 ts = r"""Simulation Results With Parameters
 $\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"""
 ts = ts.format(s1.B,s1.Om,s1.c)
-fig.suptitle(ts)
+fig.suptitle(ts,fontsize=14)
 
-#plt.savefig("../final_report/figures/test_plot.png")
+plt.savefig("../final_report/figures/test_plot.png")
 #plt.savefig("../final_report/figures/test_plot.pdf")
 
 plt.show()
