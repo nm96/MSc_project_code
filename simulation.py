@@ -229,7 +229,7 @@ class Simulation:
         ax1.set_aspect('equal')
         ax1.plot(Rx,Ry,'.',ms=0.05)
         ax1.set_xlabel(r"\Large $\tilde{x}$")
-        ax1.xaxis.labelpad = 6
+        ax1.xaxis.labelpad = 7
         ax1.set_ylabel(r"\Large $\tilde{y}$",rotation=0)
         ax2.set_aspect('equal')
         ax2.plot(Rdx,Rdy,'.',ms=0.05)

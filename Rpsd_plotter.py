@@ -22,6 +22,10 @@ print("om1 = {:.3f}, Tp = {:.3f}".format(s1.peaks[0], 2*np.pi/s1.peaks[0]))
 
 
 # Save commands
+
+
+plt.savefig("../final_report/figures/standard_Rpsd_plot.png")
+
 #plt.savefig("../report/B1_65Rpsdplot.png",dpi=400)
 #plt.savefig("../report/Om2_7psdplot.png",dpi=400)
 #plt.savefig("../report/Om2_7apsdplot.png",dpi=400)
