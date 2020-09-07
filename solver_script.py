@@ -5,8 +5,6 @@ s1 = Simulation()
 
 # Set any non-default parameters here:
 
-s1.B = 1.2
-
 s1.T = 2**12
 
 # Solve and save data:

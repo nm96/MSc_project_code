@@ -10,10 +10,14 @@ with open(inpf,'rb') as f:
 
 s1.phase_plot(d=2)
 
-# Save commands
+# Figure saving options:
+
 #plt.savefig("../report/B1_65phaseplot.png",dpi=400)
 #plt.savefig("../report/B1_5phaseplot.png",dpi=400)
 #plt.savefig("../report/Om2_7phaseplot.png",dpi=400)
 #plt.savefig("../report/Om0_3phaseplot.png",dpi=400)
+
+plt.savefig("../final_report/figures/standard_phase_plot.png")
+#plt.savefig("../final_report/figures/standard_phase_plot.pdf")
 
 plt.show()

@@ -28,5 +28,6 @@ ts = ts.format(s1.B,s1.Om,s1.c)
 fig.suptitle(ts)
 
 #plt.savefig("../final_report/figures/test_plot.png")
+#plt.savefig("../final_report/figures/test_plot.pdf")
 
 plt.show()

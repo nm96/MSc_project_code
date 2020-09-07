@@ -192,13 +192,10 @@ class Simulation:
             fig = plt.figure(fn,figsize=fs)
             ax1 = fig.add_subplot(121)
             ax2 = fig.add_subplot(122)
-            ts = r"""Solution trajectories in the rotating frame 
-            $\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"""
-            ts = ts.format(self.B,self.Om,self.c)
-            fig.suptitle(ts)
-            plt.tight_layout()
+            multi = False
         else:
             ax1, ax2 = axes
+            multi = True
         ax1.plot(Rx,Ry,'.',ms=0.05)
         ax1.set_aspect('equal')
         ax1.set_xlabel(r"\Large $\tilde{x}$")
@@ -207,8 +204,12 @@ class Simulation:
         ax2.set_aspect('equal')
         ax2.set_xlabel(r"\Large $\dot{\tilde{x}}$")
         ax2.set_ylabel(r"\Large $\dot{\tilde{y}}$",rotation=0)
-        fnm = "../plots/B{:.2f}Om{:.2f}c{:.2f}phaseplot.eps"
-        self.phase_plot_filename = fnm.format(self.B,self.Om,self.c)
+        if multi == False:
+            ts = r"""Solution trajectories in the rotating frame 
+            $\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"""
+            ts = ts.format(self.B,self.Om,self.c)
+            fig.suptitle(ts)
+            plt.tight_layout()
 
     def basic_find_period(self,tol=0.5):
         """Find the period of an existing solution by comparing the rotated
