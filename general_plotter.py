@@ -8,7 +8,7 @@ inpf = sys.argv[1] # Get input file from commmand line
 with open(inpf,'rb') as f:
     s1 = pickle.load(f)
     
-ar = 3/2
+ar = 4/3
 
 fig = plt.figure(figsize = [6.4, ar*6.4])
 
@@ -22,10 +22,11 @@ s1.psd_plot(ax = ax1)
 s1.psd_plot(R=True, ax = ax2)
 
 
-ts = r"""Simulation results with parameters
+ts = r"""Simulation Results With Parameters
 $\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"""
 ts = ts.format(s1.B,s1.Om,s1.c)
 fig.suptitle(ts)
 
+#plt.savefig("../final_report/figures/test_plot.png")
 
 plt.show()
