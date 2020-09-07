@@ -10,6 +10,10 @@ with open(inpf,'rb') as f:
 
 s1.phase_plot(d=2)
 
+fig = plt.gcf()
+
+fig.suptitle("Solution trajectories in rotating frame phase-space",y=0.9)
+
 # Figure saving options:
 
 #plt.savefig("../report/B1_65phaseplot.png",dpi=400)

@@ -196,12 +196,12 @@ class Simulation:
         else:
             ax1, ax2 = axes
             multi = True
-        ax1.plot(Rx,Ry,'.',ms=0.05)
         ax1.set_aspect('equal')
+        ax1.plot(Rx,Ry,'.',ms=0.05)
         ax1.set_xlabel(r"\Large $\tilde{x}$")
         ax1.set_ylabel(r"\Large $\tilde{y}$",rotation=0)
-        ax2.plot(Rdx,Rdy,'.',ms=0.05)
         ax2.set_aspect('equal')
+        ax2.plot(Rdx,Rdy,'.',ms=0.05)
         ax2.set_xlabel(r"\Large $\dot{\tilde{x}}$")
         ax2.set_ylabel(r"\Large $\dot{\tilde{y}}$",rotation=0)
         if multi == False:
