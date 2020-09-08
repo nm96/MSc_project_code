@@ -9,7 +9,11 @@ inpf = sys.argv[1] # Get input file from commmand line
 with open(inpf,'rb') as f:
     s1 = pickle.load(f)
 
-s1.Rpsd_plot(om_max=20)
+s1.Rpsd_plot(om_max=15)
+
+ax = plt.gca()
+
+ax.set_title(r"RPSD plot for simulation at standard parameter values")
 
 s1.find_peaks()
 

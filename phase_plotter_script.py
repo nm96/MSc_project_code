@@ -12,7 +12,7 @@ s1.phase_plot(d=2)
 
 fig = plt.gcf()
 
-fig.suptitle("Solution trajectories in rotating frame phase-space",y=0.9)
+fig.suptitle("Phase-space plots for simulation at standard parameter values",y=0.9)
 
 # Figure saving options:
 

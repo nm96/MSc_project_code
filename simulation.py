@@ -135,7 +135,7 @@ class Simulation:
         tf = time.time()
         #print("Transform time = {:.2f}s".format(tf-t0))
 
-    def psd_plot(self,fn=1,om_max=10,R=False,fs=[6,4],ax=None):
+    def psd_plot(self,fn=1,om_max=10,R=False,fs=[6.4,3.2],ax=None):
         self.transform(R)
         if ax == None:
             fig, ax = plt.subplots(num=fn,figsize=fs)
@@ -167,7 +167,7 @@ class Simulation:
         fnm = "../plots/B{:.2f}Om{:.2f}c{:.2f}psdplot.eps"
         self.psd_plot_filename = fnm.format(self.B,self.Om,self.c)
 
-    def Rpsd_plot(self,fn=1,om_max=10,fs=[6,4],ax=None):
+    def Rpsd_plot(self,fn=1,om_max=10,fs=[6.4,3.2],ax=None):
         self.transform(R=True)
         if ax == None:
             fig, ax = plt.subplots(num=fn,figsize=fs)
