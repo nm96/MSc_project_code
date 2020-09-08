@@ -169,6 +169,7 @@ class Simulation:
 
     def Fpsd_plot(self,fn=1,om_max=10,R=False,fs=[6.4,3.2]):
         fig = plt.figure()
+        fig.suptitle(r"PSD plots for $x, y, \dot{x}$ and $\dot{y}$",y=0.97)
         v = 0
         for sp in [221,222,223,224]:
             ax = fig.add_subplot(sp)
@@ -190,8 +191,7 @@ class Simulation:
             ax.axvline(self.Om,ls='--',c='r',label=r"$\Omega$")
             ax.legend()
             v += 1
-        plt.tight_layout()
-        fig.suptitle(r"PSD plots for $x, y, \dot{x}$ and $\dot{y}$")
+        plt.tight_layout(rect=[0,0,1,0.95])
 
     def Rpsd_plot(self,fn=1,om_max=10,fs=[6.4,3.2],ax=None):
         self.transform(R=True)
