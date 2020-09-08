@@ -115,7 +115,7 @@ class Simulation:
         Yr = spo.root(G,Y0)
         self.Tp = Yr.x[-1]
 
-    def transform(self,R=False):
+    def transform(self,R=False,v=0):
         """Method for producing a power spectrum density"""
         t0 = time.time()
         N = len(self.t)
@@ -123,20 +123,20 @@ class Simulation:
         T = self.T
         if R:
             self.rotate()
-            x = self.RX[0][N1:]
+            x = self.RX[v][N1:]
             w = np.hanning(N1)
             self.P = (2/N1)*abs(np.fft.fft(w*x))**2
             self.om = np.arange(N1)*4*np.pi/T
         else:
-            x = self.X[0][N1:]
+            x = self.X[v][N1:]
             w = np.hanning(N1)
             self.P = (2/N1)*abs(np.fft.fft(w*x))**2
             self.om = np.arange(N1)*4*np.pi/T
         tf = time.time()
         #print("Transform time = {:.2f}s".format(tf-t0))
 
-    def psd_plot(self,fn=1,om_max=10,R=False,fs=[6.4,3.2],ax=None):
-        self.transform(R)
+    def psd_plot(self,fn=1,om_max=10,R=False,fs=[6.4,3.2],ax=None,v=0):
+        self.transform(R,v=v)
         if ax == None:
             fig, ax = plt.subplots(num=fn,figsize=fs)
             multi = False
@@ -166,6 +166,32 @@ class Simulation:
             ax.legend()
         fnm = "../plots/B{:.2f}Om{:.2f}c{:.2f}psdplot.eps"
         self.psd_plot_filename = fnm.format(self.B,self.Om,self.c)
+
+    def Fpsd_plot(self,fn=1,om_max=10,R=False,fs=[6.4,3.2]):
+        fig = plt.figure()
+        v = 0
+        for sp in [221,222,223,224]:
+            ax = fig.add_subplot(sp)
+            self.transform(R,v=v)
+            ax.set_xlim([0,om_max])
+            om_nat = (self.k/self.m)**0.5
+            ax.semilogy(self.om,self.P,c='k',linewidth=1)
+            locmaj = matplotlib.ticker.LogLocator(base=100,numticks=30) 
+            ax.yaxis.set_major_locator(locmaj)
+            locmin = matplotlib.ticker.LogLocator(base=100,subs=(0.2,0.4,0.6,0.8),
+                    numticks=50)
+            ax.yaxis.set_minor_locator(locmin)
+            ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
+            ax.grid()
+            ax.set_ylabel("$P(\omega)$",rotation=0)
+            ax.yaxis.labelpad = 20
+            ax.set_xlabel("$\omega$")
+            ax.axvline(om_nat,ls='--',c='g',label=r"$\omega_0$")
+            ax.axvline(self.Om,ls='--',c='r',label=r"$\Omega$")
+            ax.legend()
+            v += 1
+        plt.tight_layout()
+        fig.suptitle(r"PSD plots for $x, y, \dot{x}$ and $\dot{y}$")
 
     def Rpsd_plot(self,fn=1,om_max=10,fs=[6.4,3.2],ax=None):
         self.transform(R=True)
