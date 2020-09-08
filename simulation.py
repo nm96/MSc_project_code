@@ -161,7 +161,7 @@ class Simulation:
             ax.set_title(ts)
             plt.tight_layout()
         if R == False:
-            ax.axvline(om_nat,ls='--',c='g',label=r"$\omega_{nat}$")
+            ax.axvline(om_nat,ls='--',c='g',label=r"$\omega_0$")
             ax.axvline(self.Om,ls='--',c='r',label=r"$\Omega$")
             ax.legend()
         fnm = "../plots/B{:.2f}Om{:.2f}c{:.2f}psdplot.eps"
