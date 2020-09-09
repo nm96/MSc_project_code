@@ -13,7 +13,7 @@ ar = 4/3
 fig = plt.figure(figsize = [6.4, ar*6.4])
 
 ax1 = fig.add_axes([0.2, 0.1/ar, 0.7, 0.18]) # Dimensions as fractions of fig width/height.
-ax2 = fig.add_axes([0.2, 0.2 + 0.2/ar, 0.7, 0.18])
+ax2 = fig.add_axes([0.2, 0.22 + 0.2/ar, 0.7, 0.18])
 ax3 = fig.add_axes([0.2, 0.5 + 0.2/ar, 0.3, 0.3/ar])
 ax4 = fig.add_axes([0.6, 0.5 + 0.2/ar, 0.3, 0.3/ar])
 
@@ -21,8 +21,8 @@ s1.phase_plot(axes=(ax3,ax4))
 s1.psd_plot(ax = ax1)
 s1.Rpsd_plot(ax = ax2)
 
-ax1.set_title(r"PSD plot for lateral motion in the stationary frame")
-ax2.set_title(r"PSD plot for lateral motion in the rotating frame")
+ax1.set_title(r"PSD plot")
+ax2.set_title(r"RPSD plot")
 
 fig.text(0.4, 0.89, r"Phase space trajectories",fontsize=12)
 
