@@ -220,8 +220,9 @@ class Simulation:
             plt.tight_layout()
         self.find_peaks()
         om_1 = self.peaks[0]
-        ax.axvline(om_1,ls='--',c='b',label=r"$\omega_1$")
-        ax.legend()
+        if self.check_periodicity():
+            ax.axvline(om_1,ls='--',c='b',label=r"$\omega_1 = {:.3f}$".format(om_1))
+            ax.legend()
 
     def find_peaks(self,om_max=10):
         P = self.P[self.om < om_max]
