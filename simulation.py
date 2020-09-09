@@ -232,9 +232,10 @@ class Simulation:
         self.find_peaks(om_max=20)
         N = min(len(self.peaks),5)
         om1 = self.peaks[0]
-        print(self.peaks[:N])
-        print(om1*np.arange(1,N+1))
-        return np.allclose(self.peaks[:N], om1*np.arange(1,N+1), atol = 1e-2)
+        om = self.peaks[:N]
+        print(abs(om/om1 - np.round(om/om1)))
+        return np.allclose(abs(om/om1 - np.round(om/om1)), np.zeros(N), atol =
+                1e-2)
 
     def rotate(self):
         """Transform all components of the solution to the rotating frame"""
