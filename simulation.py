@@ -23,7 +23,7 @@ class Simulation:
     h = 1
     Om = 4.1
     c = 0.5
-    B = 0.5
+    B = 1
 
     # Default integration parameters
     X0 = [0.01,0,0,0]
