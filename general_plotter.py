@@ -8,12 +8,12 @@ inpf, opf = sys.argv[1], sys.argv[2]
 with open(inpf,'rb') as f:
     s1 = pickle.load(f)
     
-ar = 4/3
+ar = 5/4
 
 fig = plt.figure(figsize = [6.4, ar*6.4])
 
-ax1 = fig.add_axes([0.2, 0.1/ar, 0.7, 0.18]) # Dimensions as fractions of fig width/height.
-ax2 = fig.add_axes([0.2, 0.22 + 0.2/ar, 0.7, 0.18])
+ax1 = fig.add_axes([0.2, 0.1/ar, 0.7, 0.20]) # Dimensions as fractions of fig width/height.
+ax2 = fig.add_axes([0.2, 0.22 + 0.2/ar, 0.7, 0.20])
 ax3 = fig.add_axes([0.2, 0.5 + 0.2/ar, 0.3, 0.3/ar])
 ax4 = fig.add_axes([0.6, 0.5 + 0.2/ar, 0.3, 0.3/ar])
 
@@ -24,11 +24,10 @@ s1.Rpsd_plot(ax = ax2)
 ax1.set_title(r"PSD plot")
 ax2.set_title(r"RPSD plot")
 
-fig.text(0.4, 0.89, r"Phase space trajectories",fontsize=12)
+fig.text(0.41, 0.92, r"Phase space trajectories",fontsize=12)
 
-ts = r"""Simulation Results With Parameters
-$\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"""
-ts = ts.format(s1.B,s1.Om,s1.c)
+ts = r"""Simulation results for $\beta={:.3f}$"""
+ts = ts.format(s1.B)
 fig.suptitle(ts,fontsize=14)
 
 plt.savefig(opf)
