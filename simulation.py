@@ -228,6 +228,14 @@ class Simulation:
         om = self.om[self.om < om_max]
         self.peaks = om[sps.find_peaks(P,prominence=1e-7)[0]]
 
+    def check_periodicity(self):
+        self.find_peaks(om_max=20)
+        N = min(len(self.peaks),5)
+        om1 = self.peaks[0]
+        print(self.peaks[:N])
+        print(om1*np.arange(1,N+1))
+        return np.allclose(self.peaks[:N], om1*np.arange(1,N+1), atol = 1e-2)
+
     def rotate(self):
         """Transform all components of the solution to the rotating frame"""
         x, dx, y, dy = self.X
