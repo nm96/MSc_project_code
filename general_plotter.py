@@ -3,7 +3,7 @@ import sys
 import pickle
 import matplotlib.pyplot as plt
 
-inpf = sys.argv[1] # Get input file from commmand line
+inpf, opf = sys.argv[1], sys.argv[2]
 
 with open(inpf,'rb') as f:
     s1 = pickle.load(f)
@@ -31,7 +31,8 @@ $\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"""
 ts = ts.format(s1.B,s1.Om,s1.c)
 fig.suptitle(ts,fontsize=14)
 
-plt.savefig("../final_report/figures/test_plot.png")
+plt.savefig(opf)
+#plt.savefig("../final_report/figures/test_plot.png")
 #plt.savefig("../final_report/figures/test_plot.pdf")
 
 plt.show()
