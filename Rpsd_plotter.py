@@ -23,7 +23,7 @@ print("om1 = {:.3f}, Tp = {:.3f}".format(s1.peaks[0], 2*np.pi/s1.peaks[0]))
 
 n = 1
 for om in s1.peaks[:4]:
-    print("\t ${}\\tilde{{\omega}}_1$ \t & \t ${:.6f}$ \t \\\\".format(n,om))
+    print("\t ${}\omega_1$ \t & \t ${:.6f}$ \t \\\\".format(n,om))
     n += 1
 
 print(s1.check_periodicity())

@@ -21,6 +21,7 @@ fig = plt.gcf()
 #plt.savefig("../report/Om2_7phaseplot.png",dpi=400)
 #plt.savefig("../report/Om0_3phaseplot.png",dpi=400)
 
+#plt.savefig("../final_report/figures/nonperiodic_phase_plot.png")
 #plt.savefig("../final_report/figures/standard_phase_plot.png")
 #plt.savefig("../final_report/figures/standard_phase_plot.pdf")
 
