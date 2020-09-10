@@ -17,17 +17,19 @@ ax2 = fig.add_axes([0.2, 0.22 + 0.2/ar, 0.7, 0.20])
 ax3 = fig.add_axes([0.2, 0.5 + 0.2/ar, 0.3, 0.3/ar])
 ax4 = fig.add_axes([0.6, 0.5 + 0.2/ar, 0.3, 0.3/ar])
 
+om_max = 5  # Remember to change this to an appropriate value!
+
 s1.phase_plot(axes=(ax3,ax4))
-s1.psd_plot(ax = ax1)
-s1.Rpsd_plot(ax = ax2)
+s1.psd_plot(ax = ax1,om_max = om_max)
+s1.Rpsd_plot(ax = ax2, om_max = om_max)
 
 ax1.set_title(r"PSD plot")
 ax2.set_title(r"RPSD plot")
 
 fig.text(0.41, 0.92, r"Phase space trajectories",fontsize=12)
 
-ts = r"""Simulation results for $\beta={:.3f}$"""
-ts = ts.format(s1.B)
+ts = r"""Simulation results for $\Omega = {:.3f}$, $\beta={:.3f}$"""
+ts = ts.format(s1.Om, s1.B)
 fig.suptitle(ts,fontsize=14)
 
 plt.savefig(opf)
