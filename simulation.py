@@ -236,7 +236,7 @@ class Simulation:
         om = self.peaks[:N]
         print(abs(om/om1 - np.round(om/om1)))
         return np.allclose(abs(om/om1 - np.round(om/om1)), np.zeros(N), atol =
-                1e-2)
+                2e-2)
 
     def rotate(self):
         """Transform all components of the solution to the rotating frame"""
