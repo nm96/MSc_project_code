@@ -40,31 +40,37 @@ def period_at(B,c):
     s = simulation.Simulation()
     s.B = B
     s.c = c
+    s.k = 0
     s.T = 2**12
     s.solve()
     s.find_period()
-    return s.Tp
+    return (s.check_periodicity(), s.Tp)
 
-N = 21
-M = 6
+N = 20
+M = 10
 
-B_range = (1.2,1.7)
-c_range = (0.4,0.7)
+B_range = (14,16)
+c_range = (45,60)
 
 B_set = np.linspace(*B_range,N)
 c_set = np.linspace(*c_range,M)
 
 periods = np.zeros((N,M))
+periodicity = np.zeros((N,M))
 
 for n in range(N):
     for m in range(M):
-        periods[n,m] = period_at(B_set[n],c_set[m])
+        p, T = period_at(B_set[n], c_set[m])
+        periods[n,m] = T
+        periodicity[n,m] = p
 
 print(periods)
+print(periodicity)
 
-run = {'B_set':B_set, "c_set":c_set, "periods":periods}
+run = {'B_set':B_set, "c_set":c_set, "periods":periods,
+        "periodicity":periodicity}
 
-fn = "../data/multi_parameter_runs/Bcperiods.pkl"
+fn = "../data/multi_parameter_runs/Bcperiods3.pkl"
 with open(fn,'wb') as f:
     pickle.dump(run, f, pickle.HIGHEST_PROTOCOL)
 
