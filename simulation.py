@@ -279,6 +279,34 @@ class Simulation:
             fig.suptitle(ts)
             plt.tight_layout()
 
+    def stationary_phase_plot(self,fn=1,d=2,fs=[6,4],axes=None):
+        self.N = len(self.t)
+        N1 = self.N - self.N//d
+        x,dx,y,dy = self.X[:,N1:]
+        if axes == None:
+            fig = plt.figure(fn,figsize=fs)
+            ax1 = fig.add_subplot(121)
+            ax2 = fig.add_subplot(122)
+            multi = False
+        else:
+            ax1, ax2 = axes
+            multi = True
+        ax1.set_aspect('equal')
+        ax1.plot(x,y,'.',ms=0.05)
+        ax1.set_xlabel(r"\Large $x$")
+        ax1.xaxis.labelpad = 7
+        ax1.set_ylabel(r"\Large $y$",rotation=0)
+        ax2.set_aspect('equal')
+        ax2.plot(dx,dy,'.',ms=0.05)
+        ax2.set_xlabel(r"\Large $\dot{x}$")
+        ax2.set_ylabel(r"\Large $\dot{y}$",rotation=0)
+        if multi == False:
+            ts = r"""Solution trajectories in the stationary frame 
+            $\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"""
+            ts = ts.format(self.B,self.Om,self.c)
+            fig.suptitle(ts)
+            plt.tight_layout()
+
     def basic_find_period(self,tol=0.5):
         """Find the period of an existing solution by comparing the rotated
         trajectory time series with itself. Slightly rough at present, may
