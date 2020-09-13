@@ -40,18 +40,17 @@ def period_at(B,c):
     s = simulation.Simulation()
     s.B = B
     s.c = c
-    s.k = 0
-    s.Om = 1
+    s.Om = 0.17
     s.T = 2**12
     s.solve()
     s.find_period()
     return (s.check_periodicity(), s.Tp)
 
-N = 100
+N = 81
 M = 1
 
-B_range = (14,16)
-c_range = (50,50)
+B_range = (2.720, 2.800)
+c_range = (0.05,0.05)
 
 B_set = np.linspace(*B_range,N)
 c_set = np.linspace(*c_range,M)
