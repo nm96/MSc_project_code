@@ -12,12 +12,13 @@ s1.phase_plot(d=2)
 
 fig = plt.gcf()
 
-#fig.suptitle("Phase-space plots for simulation at standard parameter values",y=0.9)
+fig.suptitle("Phase-space plots for simulation at standard parameter values",y=0.9)
 
 # Figure saving options:
 
-#plt.savefig("../final_report/figures/standard_phase_plot.png")
+plt.savefig("../final_report/figures/standard_phase_plot.png",dpi=200)
 #plt.savefig("../final_report/figures/standard_phase_plot.pdf")
-plt.savefig("../final_report/figures/nonperiodic_phase_plot.pdf")
+#plt.savefig("../final_report/figures/nonperiodic_phase_plot.pdf")
+#plt.savefig("../final_report/figures/nonperiodic_phase_plot.png",dpi=200)
 
 plt.show()

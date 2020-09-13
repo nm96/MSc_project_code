@@ -170,7 +170,7 @@ class Simulation:
 
     def Fpsd_plot(self,fn=1,om_max=10,R=False,fs=[6.4,3.2]):
         fig = plt.figure()
-        fig.suptitle(r"""PSD plots with $x, y, \dot{x}$ and $\dot{y}$ as the transformed variable""",y=0.97)
+        fig.suptitle(r"""PSD plots with $x, y, \dot{x}$ and $\dot{y}$ as the transformed variables""",y=0.97)
         v = 0
         for sp in [221,222,223,224]:
             ax = fig.add_subplot(sp)

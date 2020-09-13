@@ -22,8 +22,8 @@ for om in s1.peaks:
 
 # Save commands
 
-#plt.savefig("../final_report/figures/standard_psd_plot.png")
-plt.savefig("../final_report/figures/standard_psd_plot.pdf")
+plt.savefig("../final_report/figures/standard_psd_plot.png",dpi=200)
+#plt.savefig("../final_report/figures/standard_psd_plot.pdf")
 
 #plt.savefig("../report/B1_65psdplot.png",dpi=400)
 #plt.savefig("../report/B1_5psdplot.png",dpi=400)

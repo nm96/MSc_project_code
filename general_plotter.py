@@ -28,11 +28,15 @@ ax2.set_title(r"RPSD plot")
 
 fig.text(0.41, 0.92, r"Phase space trajectories",fontsize=12)
 
-ts = r"""Simulation results for $\Omega = {:.3f}$, $\beta={:.3f}$"""
-ts = ts.format(s1.Om, s1.B)
+ts = r"""Simulation results with $\Omega = {:.1f}$, $k = {:.1f}$, $c = {:.0f}$, $\beta={:.1f}$"""
+ts = ts.format(s1.Om, s1.k, s1.c, s1.B)
+#ts = r"""Simulation results with $\Omega = {:.3f}$, $c = {:.3f}$, $\beta={:.3f}$"""
+#ts = ts.format(s1.Om, s1.c, s1.B)
+#ts = r"""Simulation results with $\beta={:.2f}$"""
+#ts = ts.format(s1.B)
 fig.suptitle(ts,fontsize=14)
 
-plt.savefig(opf)
+plt.savefig(opf,dpi=200)
 #plt.savefig("../final_report/figures/test_plot.png")
 #plt.savefig("../final_report/figures/test_plot.pdf")
 

@@ -16,6 +16,6 @@ fig.suptitle("Stationary frame plots for simulation at standard parameter values
 
 # Figure saving options:
 
-plt.savefig("../final_report/figures/standard_Sphase_plot.pdf")
+plt.savefig("../final_report/figures/standard_Sphase_plot.png",dpi=200)
 
 plt.show()

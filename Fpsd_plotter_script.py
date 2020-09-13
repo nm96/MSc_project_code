@@ -13,8 +13,8 @@ s1.Fpsd_plot(om_max=15)
 
 # Save commands
 
-#plt.savefig("../final_report/figures/standard_Fpsd_plot.png")
-plt.savefig("../final_report/figures/standard_Fpsd_plot.pdf")
+plt.savefig("../final_report/figures/standard_Fpsd_plot.png",dpi=200)
+#plt.savefig("../final_report/figures/standard_Fpsd_plot.pdf")
 
 #plt.savefig("../report/B1_65psdplot.png",dpi=400)
 #plt.savefig("../report/B1_5psdplot.png",dpi=400)

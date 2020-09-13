@@ -31,8 +31,8 @@ print(s1.check_periodicity())
 # Save commands
 
 
-#plt.savefig("../final_report/figures/standard_Rpsd_plot.png")
-plt.savefig("../final_report/figures/standard_Rpsd_plot.pdf")
+plt.savefig("../final_report/figures/standard_Rpsd_plot.png",dpi=200)
+#plt.savefig("../final_report/figures/standard_Rpsd_plot.pdf")
 
 #plt.savefig("../report/B1_65Rpsdplot.png",dpi=400)
 #plt.savefig("../report/Om2_7psdplot.png",dpi=400)
