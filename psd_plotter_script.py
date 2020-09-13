@@ -17,7 +17,7 @@ ax.set_title(r"PSD plot for simulation at standard parameter values")
 s1.find_peaks()
 
 for om in s1.peaks:
-    print("\t $$ \t & \t ${:.3f}$ \t \\\\".format(om))
+    print("\t ${:.3f}$ \t & \t $$ \t \\\\".format(om))
 
 
 # Save commands

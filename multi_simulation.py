@@ -41,16 +41,17 @@ def period_at(B,c):
     s.B = B
     s.c = c
     s.k = 0
+    s.Om = 1
     s.T = 2**12
     s.solve()
     s.find_period()
     return (s.check_periodicity(), s.Tp)
 
-N = 20
-M = 10
+N = 100
+M = 1
 
 B_range = (14,16)
-c_range = (45,60)
+c_range = (50,50)
 
 B_set = np.linspace(*B_range,N)
 c_set = np.linspace(*c_range,M)
