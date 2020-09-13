@@ -15,7 +15,7 @@ s1.Rpsd_plot(om_max=om_max)
 
 ax = plt.gca()
 
-#ax.set_title(r"RPSD plot for simulation at standard parameter values")
+ax.set_title(r"RPSD plot for simulation at standard parameter values")
 
 s1.find_peaks(om_max=om_max)
 
@@ -32,6 +32,7 @@ print(s1.check_periodicity())
 
 
 #plt.savefig("../final_report/figures/standard_Rpsd_plot.png")
+plt.savefig("../final_report/figures/standard_Rpsd_plot.pdf")
 
 #plt.savefig("../report/B1_65Rpsdplot.png",dpi=400)
 #plt.savefig("../report/Om2_7psdplot.png",dpi=400)

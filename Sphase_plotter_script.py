@@ -16,13 +16,6 @@ fig.suptitle("Stationary frame plots for simulation at standard parameter values
 
 # Figure saving options:
 
-#plt.savefig("../report/B1_65phaseplot.png",dpi=400)
-#plt.savefig("../report/B1_5phaseplot.png",dpi=400)
-#plt.savefig("../report/Om2_7phaseplot.png",dpi=400)
-#plt.savefig("../report/Om0_3phaseplot.png",dpi=400)
-
-#plt.savefig("../final_report/figures/nonperiodic_phase_plot.png")
-#plt.savefig("../final_report/figures/standard_Sphase_plot.png")
-#plt.savefig("../final_report/figures/standard_phase_plot.pdf")
+plt.savefig("../final_report/figures/standard_Sphase_plot.pdf")
 
 plt.show()

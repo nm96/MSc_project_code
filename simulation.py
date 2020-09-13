@@ -170,7 +170,7 @@ class Simulation:
 
     def Fpsd_plot(self,fn=1,om_max=10,R=False,fs=[6.4,3.2]):
         fig = plt.figure()
-        fig.suptitle(r"PSD plots for $x, y, \dot{x}$ and $\dot{y}$",y=0.97)
+        fig.suptitle(r"""PSD plots with $x, y, \dot{x}$ and $\dot{y}$ as the transformed variable""",y=0.97)
         v = 0
         for sp in [221,222,223,224]:
             ax = fig.add_subplot(sp)
@@ -273,7 +273,7 @@ class Simulation:
         ax2.set_xlabel(r"\Large $\dot{\tilde{x}}$")
         ax2.set_ylabel(r"\Large $\dot{\tilde{y}}$",rotation=0)
         if multi == False:
-            ts = r"""Solution trajectories in the rotating frame 
+            ts = r"""Solution trajectories in the rotating frame with
             $\beta={:.3f}$, $\Omega={:.2f}$, $c={:.2f}$"""
             ts = ts.format(self.B,self.Om,self.c)
             fig.suptitle(ts)
